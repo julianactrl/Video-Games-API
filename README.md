@@ -54,19 +54,19 @@ DB_HOST=localhost
 
 Reemplazar `usuariodepostgres` y `passwordDePostgres` con tus propias credenciales para conectarte a postgres. Este archivo va ser ignorado en la subida a github, ya que contiene información sensible (las credenciales).
 
-Adicionalmente será necesario que creen desde psql una base de datos llamada `food`
+Adicionalmente será necesario que creen desde psql una base de datos llamada `videogames`
 
 El contenido de `client` fue creado usando: Create React App.
 
 ## Enunciado
 
-La idea general es crear una aplicación en la cual se puedan ver distintas recetas de comida junto con información relevante de las mismas utilizando la api externa [spoonacular](https://spoonacular.com/food-api) y a partir de ella poder, entre otras cosas:
+La idea general es crear una aplicación en la cual se puedan ver los distintos videojuegos disponibles junto con información relevante de los mismos utilizando la api externa [rawg](https://rawg.io/apidocs) y a partir de ella poder, entre otras cosas:
 
-  - Buscar recetas
+  - Buscar videjuegos
   - Filtrarlos / Ordenarlos
-  - Crear nuevas recetas propias
+  - Agregar nuevos videojuegos
 
-__IMPORTANTE__: Para poder utilizar esta API externa es necesario crearse una cuenta para obtener una API Key que uego debera ser incluida en todos los request que hagamos a spoonacular simplemente agregando `?apiKey={YOUR_API_KEY}` al final de cada endpoint. Agregar la clave en el archivo `.env` para que la misma no se suba al repositorio por cuestiones de seguridad y utilizarla desde allí.
+__IMPORTANTE__: Para poder utilizar esta API externa es necesario crearse una cuenta para obtener una API Key que luego debera ser incluida en todos los request que hagamos a rawg simplemente agregando `?key={YOUR_API_KEY}` al final de cada endpoint. Agregar la clave en el archivo `.env` para que la misma no se suba al repositorio por cuestiones de seguridad y utilizarla desde allí.
 
 ### Requerimientos mínimos:
 
@@ -89,66 +89,69 @@ __Pagina inicial__: deben armar una landing page con
 - [ ] Botón para ingresar al home (`Ruta principal`)
 
 __Ruta principal__: debe contener
-- [ ] Input de búsqueda para encontrar recetas por nombre
-- [ ] Área donde se verá el listado de recetas. Deberá mostrar su:
+- [ ] Input de búsqueda para encontrar videojuegos por nombre
+- [ ] Área donde se verá el listado de videojuegos. Deberá mostrar su:
   - Imagen
   - Nombre
-  - Tipo de comida (vegetarinao, vegano, apto celíaco, etc)
-- [ ] Botones/Opciones para filtrar por por tipo de comida
-- [ ] Botones/Opciones para ordenar las recetas
-- [ ] Paginado para ir buscando y mostrando las siguientes recetas
+  - Géneros
+- [ ] Botones/Opciones para filtrar por por género y por videojuego existente o agregado por nosotros
+- [ ] Botones/Opciones para ordenar los videojuegos
+- [ ] Paginado para ir buscando y mostrando los siguientes videojuegos
 
-__Ruta de detalle de receta__: debe contener
-- [ ] Los campos mostrados en la ruta principal para cada receta (imagen, nombre, tipo de plato y tipo de comida)
-- [ ] Resumen del plato
-- [ ] Puntuación
-- [ ] Nivel de "comida saludable"
-- [ ] Paso a paso
+__Ruta de detalle de videojuego__: debe contener
+- [ ] Los campos mostrados en la ruta principal para cada videojuegos (imagen, nombre, y géneros)
+- [ ] Descripción
+- [ ] Fecha de lanzamiento
+- [ ] Rating
+- [ ] Plataformas
 
-__Ruta de creación de recetas__: debe contener
+__Ruta de creación de videojuegos__: debe contener
 - [ ] Un formulario __controlado__ con los siguientes campos
   - Nombre
-  - Resumen del plato
-  - Puntuación
-  - Nivel de "comida saludable"
-  - Paso a paso
-- [ ] Posibilidad de seleccionar/agregar varios tipos de comidas
-- [ ] Botón/Opción para crear una nueva receta
+  - Descripción
+  - Fecha de lanzamiento
+  - Rating
+- [ ] Posibilidad de seleccionar/agregar varios géneros
+- [ ] Posibilidad de seleccionar/agregar varias plataformas
+- [ ] Botón/Opción para crear un nuevo videojuego
 
 #### Base de datos
 
 El modelo de la base de datos deberá tener las siguientes entidades (Aquellas propiedades marcadas con asterísco deben ser obligatorias):
 
-- [ ] Receta con las siguientes propiedades:
-  - ID: * No puede ser un ID de una receta ya existente en la API spoonacular
+- [ ] Videojuego con las siguientes propiedades:
+  - ID: * No puede ser un ID de un videojuego ya existente en la API rawg
   - Nombre *
-  - Resumen del plato *
-  - Puntuación
-  - Nivel de "comida saludable"
-  - Paso a paso
-- [ ] Tipo de comida con las siguientes propiedades:
+  - Descripción *
+  - Fecha de lanzamiento
+  - Rating
+  - Plataformas *
+- [ ] Genero con las siguientes propiedades:
   - ID
   - Nombre
 
-La relación entre ambas entidades debe ser de muchos a muchos ya que una receta puede ser parte de varios tipos de comida en simultaneo y, a su vez, un tipo de comida puede contener múltiples recetas distintas. Un ejemplo tomado de la API sería el `Strawberry Mango Green Tea Limeade` que es vegetariano, vegano y apto para celíacos, todo al mismo tiempo. Pero a su vez existen otras recetas para vegetarianos.
+La relación entre ambas entidades debe ser de muchos a muchos ya que un videojuego puede pertenecer a varios géneros en simultaneo y, a su vez, un género puede contener múltiples videojuegos distintos. Un ejemplo sería el juego `Counter Strike` pertenece a los géneros Shooter y Action al mismo tiempo. Pero a su vez existen otros videojuegos considerados como Shooter o como Action.
 
 #### Backend
 
 Se debe desarrollar un servidor en Node/Express con las siguientes rutas:
 
-- [ ] __GET /recipes?name="..."__:
-  - Obtener un listado de las primeras 9 recetas que contengan la palabra ingresada como query paraeter
-  - Si no existe ningún país mostrar un mensaje adecuado
-- [ ] __GET /recipes/{idReceta}__:
-  - Obtener el detalle de una receta en particular
-  - Debe traer solo los datos pedidos en la ruta de detalle de receta
-  - Incluir los tipos de comida asociados
-- [ ] __GET /types__:
-  - Obtener todos los tipos de comida posibles
-  - En una primera instancia, cuando no exista ninguno, deberán precargar la base de datos con los tipos de datos indicados por spoonacular [acá](https://spoonacular.com/food-api/docs#Diets)
-- [ ] __POST /recipe__:
-  - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
-  - Crea una receta en la base de datos
+- [ ] __GET /videogames__:
+  - Obtener un listado de los primeras 15 videojuegos
+  - Debe devolver solo los datos necesarios para la ruta principal
+- [ ] __GET /videogames?name="..."__:
+  - Obtener un listado de las primeros 15 videojuegos que contengan la palabra ingresada como query parameter
+  - Si no existe ningún videojuego mostrar un mensaje adecuado
+- [ ] __GET /videogame/{idVideogame}__:
+  - Obtener el detalle de un videojuego en particular
+  - Debe traer solo los datos pedidos en la ruta de detalle de videojuego
+  - Incluir los géneros asociados
+- [ ] __GET /genres__:
+  - Obtener todos los tipos de géneros de videojuegos posibles
+  - En una primera instancia deberán traerlos desde rawg y guardarlos en su propia base de datos y luego ya utilizarlos desde allí
+- [ ] __POST /videogame__:
+  - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de videojuego por body
+  - Crea un videojuego en la base de datos
 
 
 #### Testing
