@@ -66,6 +66,8 @@ La idea general es crear una aplicación en la cual se puedan ver los distintos 
   - Filtrarlos / Ordenarlos
   - Agregar nuevos videojuegos
 
+__IMPORTANTE__: Para las funcionalidades de filtrado y ordenamiento NO pueden utilizar los endpoints de la API externa que ya devuelven los resultados filtrados u ordenados sino que deben realizarlo ustedes mismos. En particular alguno de los ordenamientos o filtrados debe si o si realizarse desde el frontend.
+
 __IMPORTANTE__: Para poder utilizar esta API externa es necesario crearse una cuenta para obtener una API Key que luego debera ser incluida en todos los request que hagamos a rawg simplemente agregando `?key={YOUR_API_KEY}` al final de cada endpoint. Agregar la clave en el archivo `.env` para que la misma no se suba al repositorio por cuestiones de seguridad y utilizarla desde allí.
 
 ### Requerimientos mínimos:
@@ -95,7 +97,7 @@ __Ruta principal__: debe contener
   - Nombre
   - Géneros
 - [ ] Botones/Opciones para filtrar por por género y por videojuego existente o agregado por nosotros
-- [ ] Botones/Opciones para ordenar los videojuegos
+- [ ] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los videojuegos por orden alfabético y por rating
 - [ ] Paginado para ir buscando y mostrando los siguientes videojuegos
 
 __Ruta de detalle de videojuego__: debe contener
