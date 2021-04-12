@@ -8,8 +8,7 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      //autoIncrement: true,
-      unique: true,
+      unique: true
     },
     name: {
       type: DataTypes.STRING,
