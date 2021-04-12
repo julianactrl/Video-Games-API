@@ -130,14 +130,14 @@ __Ruta de creación de videojuegos__: debe contener
 
 El modelo de la base de datos deberá tener las siguientes entidades (Aquellas propiedades marcadas con asterísco deben ser obligatorias):
 
-- [ ] Videojuego con las siguientes propiedades:
+- [ X ] Videojuego con las siguientes propiedades:
   - ID: * No puede ser un ID de un videojuego ya existente en la API rawg
   - Nombre *
   - Descripción *
   - Fecha de lanzamiento
   - Rating
   - Plataformas *
-- [ ] Genero con las siguientes propiedades:
+- [ X ] Genero con las siguientes propiedades:
   - ID
   - Nombre
 
@@ -161,7 +161,7 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
   - Obtener el detalle de un videojuego en particular
   - Debe traer solo los datos pedidos en la ruta de detalle de videojuego
   - Incluir los géneros asociados
-- [ ] __GET /genres__:
+- [ X ] __GET /genres__:
   - Obtener todos los tipos de géneros de videojuegos posibles
   - En una primera instancia deberán traerlos desde rawg y guardarlos en su propia base de datos y luego ya utilizarlos desde allí
 - [ ] __POST /videogame__:
