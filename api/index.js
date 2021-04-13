@@ -24,7 +24,7 @@ const axios = require("axios");
 const { Genre } = require("./src/db");
 const { GENRE_URL, API_KEY } = process.env;
 // Syncing all the models at once.
-conn.sync({ alter: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(3001, async () => {
     console.log("conexión con la base de datos correcta");
     console.log("%s listening at 3001"); // eslint-disable-line no-console
