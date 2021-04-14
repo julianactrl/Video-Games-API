@@ -27,7 +27,7 @@ server.get("/", async (req, res, next) => {
       .then((g) => {
         const result = g.data.results;
         const apiSliceResult = result.slice(0, 15);
-        let gamesApi = apiSliceResult.map((game) => {
+        const gamesApi = apiSliceResult.map((game) => {
           return {
             id: game.id,
             name: game.name,
@@ -58,7 +58,7 @@ server.get("/search", async (req, res, next) => {
     .get(`${SEARCH_GAMES}${game}&key=${API_KEY}`)
     .then(async (query) => {
       try {
-        let gameDb = await Videogame.findAll({
+        const gameDb = await Videogame.findAll({
           where: {
             name: {
               [Op.iLike]: `%${game}%`,
@@ -67,7 +67,7 @@ server.get("/search", async (req, res, next) => {
         });
         const queryResultName = query.data.results;
         const apiSliceQuery = queryResultName.slice(0, 15);
-        let gamesNameApi = apiSliceQuery.map((query) => {
+        const gamesNameApi = apiSliceQuery.map((query) => {
           return {
             id: query.id,
             name: query.name,
@@ -104,7 +104,7 @@ GET /videogame/{idVideogame}__:
 server.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-  //  console.log(id);
+    //  console.log(id);
     const gameIdDb = await Videogame.findOne({
       where: { id: id },
       include: [Genre],
@@ -113,8 +113,8 @@ server.get("/:id", async (req, res, next) => {
       await axios
         .get(`${GAMES_ID}${id}?key=${API_KEY}`)
         .then((index) => {
-          let apiGameRes = index.data;
-         // console.log(apiGameRes);
+          const apiGameRes = index.data;
+          // console.log(apiGameRes);
           const newGameObj = {
             id: apiGameRes.id,
             name: apiGameRes.name,
@@ -154,20 +154,86 @@ Rating
 [ ] Botón/Opción para crear un nuevo videojuego
 */
 
-server.post('/', async (req, res, next) => {
-  const { name, description, released, rating, platforms } = req.body
-  let gamePost = await Videogame.create({
-    name,
-    description,
-    released,
-    rating,
-    platforms
-  })
-  res.send(gamePost)
-})
+server.post("/", async (req, res, next) => {
+  try {
+    const { name, description, released, rating, platforms, genres } = req.body;
+    let gamePost = await Videogame.create({
+      name: name,
+      description: description,
+      released: released,
+      rating: rating,
+      platforms: platforms,
+    });
+    const genreIdMap = genres.map(async (genre) => {
+      const newGamePost = await Genre.findOne({ where: { id: genre } });
+      console.log("soy el nuevo juego relacionado", newGamePost);
+      if (newGamePost === null) {
+        console.log("Not found!");
+      } else {
+        console.log(newGamePost instanceof Genre); // true
+        console.log(newGamePost); // 
+      }
+      await gamePost.addGenre(newGamePost);
+    });
+    console.log(genreIdMap);
+    const result = await Videogame.findOne({
+      where: {
+        name: name,
+      },
+      include: Genre,
+    });
 
-// const gamesDb = await Videogame.findAll(); //{ include: [Genre] }
-// getAllGames = getAllGames.concat(gamesDb);
-// console.log("Soy games db", gamesDb);
+    res.status(200).send(result);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = server;
+
+// const { name, description, released, rating, platforms, genres } = req.body;
+
+//     let newGame = [];
+// 		if (!!Object.keys(genres).length) {
+// 			for (genre in genres) {
+// 				if (genres[genre] === true) {
+// 					newGame.push(genre)
+// 				}
+// 			}
+// 		}
+
+//     let gamePost;
+//     Videogame.create({
+//       name,
+//       description,
+//       released,
+//       rating,
+//       platforms
+//     })
+//     .then((data) => {
+//       gamePost = data;
+//       return Genre.findAll({
+//         where: {
+//           name: newGame
+//         }
+//       })
+//     })
+//     .then((g) => {
+//       g.forEach(g => {
+//         gamePost.addGenre(g); //Creo la relacion de la categoria con el producto recien creado
+//       })
+//       // let images = img.map(url => ({ url, productId: product.id }))
+//       // return Image.bulkCreate(images)
+//     })
+//     .then(() => {
+//       return Videogame.findOne({
+//         where: { name: gamePost.name },
+//         include: { model: Genre }
+//       })
+//     })
+//     .then((data) => {
+//       res.status(201).json(data);
+//     })
+//     .catch(() => {
+//       res.status(500).json({ message: "Internal server error" })
+//     })
