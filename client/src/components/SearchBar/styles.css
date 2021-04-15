@@ -1,0 +1,9 @@
+form input .input {
+    border-radius: 50px;
+    background-color: bisque;
+    margin-right: 5px;
+}
+
+.button-search {
+    border: none
+}
