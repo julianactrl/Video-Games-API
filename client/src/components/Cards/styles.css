@@ -1,0 +1,15 @@
+.full {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    }
+
+.showing {
+    display: grid;
+    grid-gap: 2% 0;
+    grid-template-columns: repeat(3, 5fr);
+    position: relative;
+}

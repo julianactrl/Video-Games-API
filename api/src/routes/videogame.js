@@ -22,12 +22,14 @@ const { Op } = require("sequelize");
 // Debe devolver solo los datos necesarios para la ruta principal
 server.get("/", async (req, res, next) => {
   try {
-    await axios
-      .get(`${GAMES_ALL}${API_KEY}`)
-      .then((g) => {
-        const result = g.data.results;
-        const apiSliceResult = result.slice(0, 15);
-        const gamesApi = apiSliceResult.map((game) => {
+    const gamesDbAll = await Videogame.findAll({ include: [Genre] })
+    
+    let gamesApi;
+    await axios.get(`${GAMES_ALL}${API_KEY}`)
+      .then((g) => {      
+        //console.log(g.data.next)
+        //const apiSliceResult = g.data.results.slice(0, 15);
+        gamesApi = g.data.results.map((game) => {
           return {
             id: game.id,
             name: game.name,
@@ -38,9 +40,9 @@ server.get("/", async (req, res, next) => {
             genres: game.genres.map((g) => g.name).join(", "),
           };
         });
-        res.status(200).send(gamesApi);
       })
       .catch((err) => next(err));
+      res.status(200).send(gamesDbAll.concat(gamesApi).slice(0, 15));
   } catch (err) {
     next(err);
   }
@@ -171,7 +173,7 @@ server.post("/", async (req, res, next) => {
         console.log("Not found!");
       } else {
         console.log(newGamePost instanceof Genre); // true
-        console.log(newGamePost); // 
+        console.log(newGamePost); //
       }
       await gamePost.addGenre(newGamePost.id);
     });
@@ -190,4 +192,3 @@ server.post("/", async (req, res, next) => {
 });
 
 module.exports = server;
-
