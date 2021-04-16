@@ -1,4 +1,4 @@
-import { GET_ALL_VIDEOGAMES } from './../constants'
+import { GET_ALL_VIDEOGAMES, GET_GAMES_SUCCESS, GET_GAMES_ERROR } from './../constants'
 
 const initialState = {
   games: []
@@ -11,6 +11,7 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           games: action.payload,
         };
+      case G
   
       default:
         return state;
