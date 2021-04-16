@@ -2,11 +2,11 @@ import React from "react";
 import Card from "../../components/Card";
 import "./styles.css";
 
-const Cards = (props) => (
+const Cards = ({games})=> (
     <div className="full">
       <div className="showing">
-        {props.videogames.length > 0 ? (
-          props.videogames.map((data) => <Card data={data} />)
+        {games.length > 0 ? (
+          games.map((data) => <Card data={data} />)
         ) : (
           <div>Not Found Games</div>
         )}

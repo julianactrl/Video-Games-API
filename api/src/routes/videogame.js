@@ -22,11 +22,21 @@ const { Op } = require("sequelize");
 // Debe devolver solo los datos necesarios para la ruta principal
 server.get("/", async (req, res, next) => {
   try {
-    const gamesDbAll = await Videogame.findAll({ include: [Genre] })
-    
+    const gamesDbAll = await Videogame.findAll({ include: [Genre] });
+    const select = gamesDbAll.map((e) => {
+      return {
+        name: e.name,
+        description: e.description,
+        rating: e.rating,
+        platforms: e.platforms,
+        released: e.released,
+        genres: e.genres.map((g) => g.name).join(", "),
+      };
+    });
     let gamesApi;
-    await axios.get(`${GAMES_ALL}${API_KEY}`)
-      .then((g) => {      
+    await axios
+      .get(`${GAMES_ALL}${API_KEY}`)
+      .then((g) => {
         //console.log(g.data.next)
         //const apiSliceResult = g.data.results.slice(0, 15);
         gamesApi = g.data.results.map((game) => {
@@ -42,7 +52,7 @@ server.get("/", async (req, res, next) => {
         });
       })
       .catch((err) => next(err));
-      res.status(200).send(gamesDbAll.concat(gamesApi).slice(0, 15));
+    res.status(200).send(select.concat(gamesApi))
   } catch (err) {
     next(err);
   }

@@ -1,0 +1,44 @@
+.navPag {
+  width: 100%;
+  height: 8vh;
+}
+
+.navPag .pagination {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+.navPag .pagination li {
+  height: 100%;
+  width: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.navPag .pagination li button {
+  background: #c5c3d6;
+  border: none;
+  border-radius: 50%;
+  height: 65%;
+  width: 70%;
+  outline: none;
+  color: #6c6b75;
+  box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
+}
+
+.navPag .pagination li button:hover {
+  color: whitesmoke;
+}
+
+.navPag .pagination li button:focus {
+  color: #f0f0f0;
+  background-color: #6c6b75;
+}

@@ -1,20 +1,21 @@
 import React from "react";
-//import "./styles.css";
+import "./styles.css";
 
 export const Pagination = ({ cardPerPage, totalVideogames, pagination }) => {
+    console.log(totalVideogames)
   const pageNumbers = [];
-
+    console.log("SOY PAGE NUMBER", pageNumbers)
   for (let i = 1; i <= Math.ceil(totalVideogames / cardPerPage); i++) {
     pageNumbers.push(i); 
   }
 
   return (
-    <nav className="navPag">
+    <div className="navPag">
       <ul className="pagination">
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">
             <button
-              onClick={(e) => pagination(e, number)}
+              onClick={(e) =>  pagination(e, number)}
               className="page-link"
             >
               {number}
@@ -22,6 +23,6 @@ export const Pagination = ({ cardPerPage, totalVideogames, pagination }) => {
           </li>
         ))}
       </ul>
-    </nav>
+    </div>
   );
 };
