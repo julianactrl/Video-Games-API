@@ -1,17 +1,22 @@
 import React from "react";
 import Card from "../../components/Card";
+import Loader from './../Loader'
 import "./styles.css";
 
-const Cards = ({games})=> (
-    <div className="full">
-      <div className="showing">
-        {games.length > 0 ? (
-          games.map((data) => <Card data={data} />)
-        ) : (
-          <div>Not Found Games</div>
-        )}
-      </div>
+
+const Cards = ({games, loading, error})=> {
+  console.log('SOY EL LOADING', loading)
+  return (
+    <div className="cards-container">
+    <div className="cards">
+      {loading ? <Loader /> : error ? <div>{error}</div> :  (
+        games.map((data) => <Card data={data} />)
+      )}
     </div>
-);
+    {/* <Loader /> */}
+  </div>
+  )
+}
+   
 
 export default Cards;

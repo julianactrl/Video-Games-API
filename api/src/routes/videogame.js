@@ -56,7 +56,7 @@ server.get("/", async (req, res, next) => {
         .catch((err) => next(err));
     }
  
-    res.status(200).send(select.concat(pagesApi));
+    res.status(200).send(pagesApi.concat(select));
   } catch (err) {
     next(err);
   }

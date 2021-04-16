@@ -25,12 +25,11 @@
 
 .navPag .pagination li button {
   background: #c5c3d6;
-  border: none;
-  border-radius: 50%;
+  border: 1px solid gray;
   height: 65%;
   width: 70%;
   outline: none;
-  color: #6c6b75;
+  color: #403f42;
   box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
 }
 

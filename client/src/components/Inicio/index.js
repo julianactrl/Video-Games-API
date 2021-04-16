@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./styles.css";
 import { getAllGames } from "../../redux/actions";
@@ -12,7 +12,8 @@ const Inicio = () => {
   // Redux States
   const games = useSelector((state) => state.games);
   console.log("SOY TODOS LOS GAMES DE LA API", games);
-
+  const { loading, error } = games;
+  console.log(loading);
   let videogamesAll = games;
 
   useEffect(() => {
@@ -33,30 +34,24 @@ const Inicio = () => {
   console.log(page);
 
   return (
-    <>
+    <div className="container">
       <header className="header">
         <div className="form">
           <Link to="/form">
             <h2>Add a new game</h2>
           </Link>
         </div>
-        <div className="searchBar">
-          <SearchBar />
-        </div>
+        <SearchBar />
       </header>
-      <seccion>
-        <h1>Video Games Cards</h1>
-        <Cards games={page} />
-      </seccion>
-      <seccion>
-        <Pagination
-          cardPerPage={cardPerPage}
-          totalVideogames={videogamesAll.length}
-          pagination={pagination}
-          key={"#"}
-        />
-      </seccion>
-    </>
+      <h1>Discover all games we have for you</h1>
+      <Cards games={page} loading={loading} error={error} />
+      <Pagination
+        cardPerPage={cardPerPage}
+        totalVideogames={videogamesAll.length}
+        pagination={pagination}
+        key={"#"}
+      />
+    </div>
   );
 };
 export default Inicio;
