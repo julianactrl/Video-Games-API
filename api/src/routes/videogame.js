@@ -34,25 +34,29 @@ server.get("/", async (req, res, next) => {
       };
     });
     let gamesApi;
-    await axios
-      .get(`${GAMES_ALL}${API_KEY}`)
-      .then((g) => {
-        //console.log(g.data.next)
-        //const apiSliceResult = g.data.results.slice(0, 15);
-        gamesApi = g.data.results.map((game) => {
-          return {
-            id: game.id,
-            name: game.name,
-            image: game.background_image,
-            rating: game.rating,
-            released: game.released,
-            platforms: game.platforms.map((p) => p.platform.name).join(", "),
-            genres: game.genres.map((g) => g.name).join(", "),
-          };
-        });
-      })
-      .catch((err) => next(err));
-    res.status(200).send(select.concat(gamesApi))
+    let pagesApi = []
+   // console.log("soy el array", pagesApi)
+    for (let i = 1; i <= 5; i++) {
+      let result = await axios
+        .get(`${GAMES_ALL}${API_KEY}&page=${i}`)
+        .then((g) => {
+          gamesApi = g.data.results.map((game) => {
+            return {
+              id: game.id,
+              name: game.name,
+              image: game.background_image,
+              rating: game.rating,
+              released: game.released,
+              platforms: game.platforms.map((p) => p.platform.name).join(", "),
+              genres: game.genres.map((g) => g.name).join(", "),
+            };
+          });
+          pagesApi = pagesApi.concat(gamesApi)
+        })
+        .catch((err) => next(err));
+    }
+ 
+    res.status(200).send(select.concat(pagesApi));
   } catch (err) {
     next(err);
   }

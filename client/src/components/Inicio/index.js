@@ -13,7 +13,7 @@ const Inicio = () => {
   const games = useSelector((state) => state.games);
   console.log("SOY TODOS LOS GAMES DE LA API", games);
 
-  let videogamesAll = games
+  let videogamesAll = games;
 
   useEffect(() => {
     console.log(dispatch(getAllGames()));
@@ -23,14 +23,14 @@ const Inicio = () => {
   const pagination = (e, nro) => {
     e.preventDefault();
     setCurrentPage(nro);
-  }
-  const [currentPage, setCurrentPage] = useState(1); 
-  const [cardPerPage] = useState(5); 
+  };
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardPerPage] = useState(15);
 
-  const indexLastPage = currentPage * cardPerPage; 
-  const indexFirtsPage = indexLastPage - cardPerPage;  
+  const indexLastPage = currentPage * cardPerPage;
+  const indexFirtsPage = indexLastPage - cardPerPage;
   let page = videogamesAll.slice(indexFirtsPage, indexLastPage);
-  console.log(page)
+  console.log(page);
 
   return (
     <>
@@ -44,16 +44,18 @@ const Inicio = () => {
           <SearchBar />
         </div>
       </header>
-      <main>
+      <seccion>
         <h1>Video Games Cards</h1>
-        <Cards games={page}/> 
-        <Pagination 
+        <Cards games={page} />
+      </seccion>
+      <seccion>
+        <Pagination
           cardPerPage={cardPerPage}
           totalVideogames={videogamesAll.length}
           pagination={pagination}
           key={"#"}
         />
-      </main>
+      </seccion>
     </>
   );
 };
