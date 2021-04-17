@@ -10,7 +10,6 @@ const SearchBar = () => {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        styles={"border: 1px solid red;"}
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Search videogame..."

@@ -10,15 +10,12 @@ import { Pagination } from "../Pagination";
 const Inicio = () => {
   const dispatch = useDispatch();
   // Redux States
-  const games = useSelector((state) => state.games);
-  console.log("SOY TODOS LOS GAMES DE LA API", games);
-  const { loading, error } = games;
-  console.log(loading);
+  const {games, loading, error} = useSelector((state) => state.gamesState);
+  
   let videogamesAll = games;
 
   useEffect(() => {
     console.log(dispatch(getAllGames()));
-    console.log("render");
   }, []);
 
   const pagination = (e, nro) => {

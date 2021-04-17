@@ -2,26 +2,24 @@ import {
   GET_ALL_VIDEOGAMES,
   GET_GAMES_SUCCESS,
   GET_GAMES_ERROR,
+  SEARCH_GAMES,
 } from "./../constants";
 import axios from "axios";
-// require('dotenv').config();
-// const  {GET_ALL_GAMES } = process.env
-// console.log(GET_ALL_GAMES)
+
+const backURL = process.env.API_URL
+console.log(backURL)
 
 export const getAllGames = () => async (dispatch) => {
-  console.log('SOY EL DISPATCH', dispatch)
   dispatch({
     type: GET_ALL_VIDEOGAMES,
   });
   return await axios
-    .get('http://localhost:3001/videogames')
+    .get(`${backURL}`)
     .then((res) => {
-
-      console.log(dispatch({
+      dispatch({
         type: GET_GAMES_SUCCESS,
         payload: res.data,
-      }))
-      
+      })
     })
     .catch((err) => {
       dispatch({
@@ -30,3 +28,11 @@ export const getAllGames = () => async (dispatch) => {
       });
     });
 };
+
+// export const searchGamesQuery = () => async(data)=> {
+//   dispatch({
+//     trype: SEARCH_GAMES
+//   })
+//   return await axios
+//   .get('')
+// }
