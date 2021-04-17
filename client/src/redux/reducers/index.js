@@ -14,7 +14,7 @@ const initialState = {
     loading: false,
   },
   searchGames: {
-    result: [],
+    list: [],
     error: null,
     loading: false,
   },
@@ -49,7 +49,33 @@ const rootReducer = (state = initialState, action) => {
           loading: false,
         },
       };
-
+    case SEARCH_GAMES:
+      return {
+        ...state,
+        searchGames: {
+          list: [],
+          error: null,
+          loading: true,
+        },
+      };
+    case SEARCH_GAMES_SUCCESS:
+      return {
+        ...state,
+        searchGames: {
+          list: action.payload,
+          error: null,
+          loading: false,
+        },
+      };
+    case SEARCH_GAMES_ERROR:
+      return {
+        ...state,
+        searchGames: {
+          list: [],
+          error: true,
+          loading: false,
+        },
+      };
     default:
       return state;
   }

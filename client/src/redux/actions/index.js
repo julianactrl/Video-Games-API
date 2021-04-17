@@ -31,12 +31,14 @@ export const getAllGames = () => async (dispatch) => {
     });
 };
 
-export const searchGamesQuery = (name) => async(dispatch)=> {
+export const searchGamesQuery = (input) => async(dispatch)=> {
+  console.log('SOY EL INPUT DE SEARCH', input)
+  console.log('SOY EL TYPE', dispatch)
   dispatch({
-    trype: SEARCH_GAMES
+    type: SEARCH_GAMES,
   })
   return await axios
-  .get(`http://localhost:3001/videogames/search?search=${name}`)
+  .get(`http://localhost:3001/videogames/search?search=${input}`)
   .then(r => {
     dispatch({
       type: SEARCH_GAMES_SUCCESS,
