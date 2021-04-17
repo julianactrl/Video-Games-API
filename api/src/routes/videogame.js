@@ -68,10 +68,10 @@ Obtener un listado de las primeros 15 videojuegos que contengan la palabra ingre
 Si no existe ningún videojuego mostrar un mensaje adecuado
 */
 server.get("/search", async (req, res, next) => {
-  const { game } = req.query || "";
+  const game = req.query.search || "";
   console.log("SOY LA QUERY", game);
   await axios
-    .get(`${SEARCH_GAMES}${game}&key=${API_KEY}`)
+    .get(`${SEARCH_GAMES}?search=${game}&key=${API_KEY}`)
     .then(async (query) => {
       try {
         const gameDb = await Videogame.findAll({

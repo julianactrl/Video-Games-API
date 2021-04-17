@@ -3,18 +3,20 @@ import {
   GET_GAMES_SUCCESS,
   GET_GAMES_ERROR,
   SEARCH_GAMES,
+  SEARCH_GAMES_SUCCESS,
+  SEARCH_GAMES_ERROR,
 } from "./../constants";
 import axios from "axios";
 
-const backURL = process.env.API_URL
-console.log(backURL)
+// const backURL = process.env.API_URL
+// console.log(backURL)
 
 export const getAllGames = () => async (dispatch) => {
   dispatch({
     type: GET_ALL_VIDEOGAMES,
   });
   return await axios
-    .get(`${backURL}`)
+    .get('http://localhost:3001/videogames')
     .then((res) => {
       dispatch({
         type: GET_GAMES_SUCCESS,
@@ -29,10 +31,22 @@ export const getAllGames = () => async (dispatch) => {
     });
 };
 
-// export const searchGamesQuery = () => async(data)=> {
-//   dispatch({
-//     trype: SEARCH_GAMES
-//   })
-//   return await axios
-//   .get('')
-// }
+export const searchGamesQuery = (name) => async(dispatch)=> {
+  dispatch({
+    trype: SEARCH_GAMES
+  })
+  return await axios
+  .get(`http://localhost:3001/videogames/search?search=${name}`)
+  .then(r => {
+    dispatch({
+      type: SEARCH_GAMES_SUCCESS,
+      payload: r.data
+    })
+  })
+  .catch(err => {
+    dispatch({
+      type: SEARCH_GAMES_ERROR,
+      payload: err.response
+    })
+  })
+}
