@@ -55,7 +55,8 @@ server.get("/", async (req, res, next) => {
         })
         .catch((err) => next(err));
     }
- 
+    // const arraysDbApi = 
+    // console.log(arraysDbApi)
     res.status(200).send(pagesApi.concat(select));
   } catch (err) {
     next(err);

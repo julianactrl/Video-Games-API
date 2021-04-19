@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
-import "./styles.css";
-import mushroom from '../../assets/mushroom.png'
 import { getAllGames } from "../../redux/actions";
+
+import "./styles.css";
+import mushroom from "../../assets/mushroom.png";
+
 import SearchBar from "../SearchBar";
 import Cards from "../Cards";
 import { Pagination } from "../Pagination";
@@ -12,12 +15,26 @@ import Filter from "../Filter";
 
 const Inicio = () => {
   const dispatch = useDispatch();
+  let history = useHistory();
+  const handleClick = () => history.push("/");
+
   // Redux States
-  const { games, search, loading, error } = useSelector((state) => state.gamesState);
+  const { games, search, loading, error } = useSelector(
+    (state) => state.gamesState
+  );
+  const filterBy = useSelector((state) => state.filterBy);
+  //const loading = useSelector((state) => state.loading);
+  const orderBy = useSelector((state) => state.orderBy);
+  const filterGames = useSelector((state) => state.filterGames);
+  let allGames;
 
   useEffect(() => {
-    console.log(dispatch(getAllGames()));
+    dispatch(getAllGames());
   }, []);
+
+  filterBy === "Filter By" && orderBy === "Order By"
+    ? (allGames = games.slice())
+    : (allGames = filterGames.slice());
 
   const pagination = (e, nro) => {
     e.preventDefault();
@@ -25,27 +42,24 @@ const Inicio = () => {
   };
   const [currentPage, setCurrentPage] = useState(1);
   const [cardPerPage] = useState(15);
-
   const indexLastPage = currentPage * cardPerPage;
   const indexFirtsPage = indexLastPage - cardPerPage;
-  let page = games && games.slice(indexFirtsPage, indexLastPage);
-  console.log("SOY PAGE LET", page);
+  let page = allGames.slice(indexFirtsPage, indexLastPage);
+  console.log(page);
 
   return (
     <div className="container">
       <header className="header">
-        <div className="img">
+        <button className="img" onClick={handleClick}>
           <img src={mushroom} alt="logo" />
-        </div>
+        </button>
         <div className="searchbar">
           <SearchBar />
         </div>
         <div className="navbar">
           <div className="contenido">
             <div className="add">
-              <Link to="/add">
-                Add new game
-              </Link>
+              <Link to="/add">Add new game</Link>
             </div>
             <div className="filter">
               <Filter />
@@ -57,10 +71,10 @@ const Inicio = () => {
         </div>
       </header>
       <h1 className="main-title">Discover all games we have for you</h1>
-      <Cards games={games} loading={loading} error={error} search={search}/>
+      <Cards games={page} loading={loading} error={error} search={search} />
       <Pagination
         cardPerPage={cardPerPage}
-        totalVideogames={games && games.length}
+        totalVideogames={allGames.length}
         pagination={pagination}
         key={"#"}
       />
