@@ -29,10 +29,8 @@ const Inicio = () => {
 
   const indexLastPage = currentPage * cardPerPage;
   const indexFirtsPage = indexLastPage - cardPerPage;
-  let page = videogamesAll.slice(indexFirtsPage, indexLastPage);
-  
-
-  console.log(page);
+  let page = games && games.slice(indexFirtsPage, indexLastPage);
+  console.log("SOY PAGE LET", page);
 
   return (
     <div className="container">
@@ -60,10 +58,10 @@ const Inicio = () => {
         </div>
       </header>
       <h1 className="main-title">Discover all games we have for you</h1>
-      <Cards games={page} loading={loading} error={error} search={search}/>
+      <Cards games={games} loading={loading} error={error} search={search}/>
       <Pagination
         cardPerPage={cardPerPage}
-        totalVideogames={videogamesAll.length}
+        totalVideogames={games && games.length}
         pagination={pagination}
         key={"#"}
       />
