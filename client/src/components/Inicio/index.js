@@ -7,14 +7,13 @@ import { getAllGames } from "../../redux/actions";
 import SearchBar from "../SearchBar";
 import Cards from "../Cards";
 import { Pagination } from "../Pagination";
+import Order from "../Order";
+import Filter from "../Filter";
 
 const Inicio = () => {
   const dispatch = useDispatch();
   // Redux States
   const { games, search, loading, error } = useSelector((state) => state.gamesState);
-
-  let videogamesAll = games
-  console.log("SOY LOS GAMES", games)
 
   useEffect(() => {
     console.log(dispatch(getAllGames()));
@@ -49,10 +48,10 @@ const Inicio = () => {
               </Link>
             </div>
             <div className="filter">
-              filter
+              <Filter />
             </div>
             <div className="order">
-              order
+              <Order />
             </div>
           </div>
         </div>

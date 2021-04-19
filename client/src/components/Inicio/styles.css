@@ -1,5 +1,5 @@
 .header {
-  width: 100%;
+  max-width: 100%;
   background: #cb356b; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
