@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <>
         <Route exact path="/" component={Home} />
-        <Route exact path="/inicio" component={Inicio} />
+        <Route exact path="/init" component={Inicio} />
       </>
     </div>
   );

@@ -16,13 +16,36 @@
   align-items: center;
   justify-content: space-around;
   position: relative;
+  padding: 8px;
+  height: 80px;
 }
 
-.form{
-    font-family: 'Courier New', Courier, monospace;
+.img {
+  width: 300px;
 }
-.form a {
-    text-decoration: none;
-    color: bisque;
+.img img {
+  width: 70px;
+  height: 70px;
 }
-
+.searchbar {
+  width: 300px;
+}
+.navbar {
+  width: 300px;
+  
+}
+.contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Courier New', Courier, monospace;
+  color: aliceblue;
+  font-weight: 600;
+}
+.navbar .contenido a{
+  text-decoration: none;
+  color: aliceblue;
+}
+.navbar .contenido a:hover{
+  color: black;
+}

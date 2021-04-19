@@ -10,14 +10,15 @@ import {
 const initialState = {
   gamesState: {
     games: [],
+    search: [],
     error: null,
     loading: false,
   },
-  searchGames: {
-    list: [],
-    error: null,
-    loading: false,
-  },
+  // searchGames: {
+  //   result: [],
+  //   error: null,
+  //   loading: false,
+  // },
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -52,8 +53,8 @@ const rootReducer = (state = initialState, action) => {
     case SEARCH_GAMES:
       return {
         ...state,
-        searchGames: {
-          list: [],
+        gamesState: {
+          search: [],
           error: null,
           loading: true,
         },
@@ -61,8 +62,8 @@ const rootReducer = (state = initialState, action) => {
     case SEARCH_GAMES_SUCCESS:
       return {
         ...state,
-        searchGames: {
-          list: action.payload,
+        gamesState: {
+          search: action.payload,
           error: null,
           loading: false,
         },
@@ -70,8 +71,8 @@ const rootReducer = (state = initialState, action) => {
     case SEARCH_GAMES_ERROR:
       return {
         ...state,
-        searchGames: {
-          list: [],
+        gamesState: {
+          search: [],
           error: true,
           loading: false,
         },
