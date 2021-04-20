@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
 .header {
   max-width: 100%;
   background: #ce0a0a;
@@ -21,6 +23,7 @@
 .searchbar {
   width: 300px;
 }
+
 .navbar {
   width: 500px;
 }
@@ -72,8 +75,11 @@ button {
   cursor: pointer;
 }
 
-
 /* Transition */
 .addGame:hover {
   color: #f39c12;
+}
+
+.main-title {
+  font-family: 'Bangers', cursive;
 }
