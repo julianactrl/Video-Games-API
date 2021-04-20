@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Play&display=swap");
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(top, #fff, white);
+  background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+  text-align: center;
+}
+
+.button {
+  border-radius: 20px;
+  background: #a70321;
+  color: whitesmoke;
+  border: 2px solid;
+  padding: 7px 15px;
+  box-shadow: 0 0 8px #fff;
+  font-family: "Play", sans-serif;
+  font-weight: 600;
+  font-size: x-large;
+}
+
+.init_title {
+  font-family: "Bangers", cursive;
+  font-size: x-large;
+}

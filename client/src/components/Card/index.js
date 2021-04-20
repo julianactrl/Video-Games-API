@@ -9,9 +9,9 @@ const Card = ({ data }) => (
     </div>
     <div className="detail">
       <h3>{data.name}</h3>
-      <h4>{data.genres && data.genres}</h4>
+      <p>{data.genres && data.genres}</p>
       <div>
-        <Link to={`/videogames/${data.id}`}>
+        <Link to={`/details/${data.id}`}>
           <button type="submit">More information</button>
         </Link>
       </div>

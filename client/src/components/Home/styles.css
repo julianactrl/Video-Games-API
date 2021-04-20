@@ -1,25 +1,89 @@
-@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Play&display=swap");
-.container {
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(top, #fff, white);
-  background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+.container_home {
   text-align: center;
+  background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+}
+.header {
+  max-width: 100%;
+  background: #ce0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  padding: 8px;
+  height: 80px;
 }
 
-.button {
-  border-radius: 20px;
-  background: #a70321;
-  color: whitesmoke;
-  border: 2px solid;
-  padding: 7px 15px;
-  box-shadow: 0 0 8px #fff;
-  font-family: "Play", sans-serif;
+.img {
+  /* width: 300px; */
+  border-radius: 50%;
+  padding: 2px;
+}
+.img img {
+  width: 70px;
+  height: 70px;
+}
+.searchbar {
+  width: 300px;
+}
+
+.navbar {
+  width: 500px;
+}
+.contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Courier New", Courier, monospace;
+  color: aliceblue;
   font-weight: 600;
-  font-size: x-large;
+}
+.navbar .contenido a {
+  text-decoration: none;
+  color: aliceblue;
+}
+.navbar .contenido a:hover {
+  color: black;
 }
 
-.init_title {
-  font-family: "Bangers", cursive;
-  font-size: x-large;
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #2c3e50;
+  background-image: none;
+}
+/* Remove IE arrow */
+.button_game::-ms-expand {
+  display: none;
+}
+
+.addGame {
+  position: relative;
+  display: flex;
+  width: 10em;
+  height: 2.5rem;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: 0.25em;
+}
+.button_game {
+  flex: 1;
+  padding: 0 0.5em;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Transition */
+.addGame:hover {
+  color: #f39c12;
+}
+
+.main-title {
+  font-family: 'Bangers', cursive;
 }

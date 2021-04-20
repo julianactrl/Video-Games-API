@@ -12,20 +12,12 @@ import {
   ORDER_ASC_RATING,
   ORDER_DESC_NAME,
   ORDER_DESC_RATING,
+  GET_GAME_ID,
+  GET_GAME_ID_SUCCESS,
+  GET_GAME_ID_ERROR,
 } from "./../constants";
 import axios from "axios";
 
-// const backURL = process.env.API_URL
-// console.log(backURL)
-
-// export const resetAll = () => {
-//   //Rset the Redux store to its initial state
-//   return (dispatch) => {
-//     dispatch({
-//       type: RESET,
-//     });
-//   };
-// };
 
 // GETTING ALL GAMES FROM API AND DB 137
 export const getAllGames = () => async (dispatch) => {
@@ -50,8 +42,6 @@ export const getAllGames = () => async (dispatch) => {
 
 // SEARCH GAMES BY QUERY = NAME
 export const searchGamesQuery = (input) => async (dispatch) => {
-  console.log("SOY EL INPUT DE SEARCH", input);
-  console.log("SOY EL TYPE", dispatch);
   dispatch({
     type: SEARCH_GAMES,
   });
@@ -73,7 +63,6 @@ export const searchGamesQuery = (input) => async (dispatch) => {
 
 // GETTING GENRES FROM DB AND ORDER BY
 export const getGenresDb = () => async (dispatch) => {
-  console.log("SOY EL TYPE", dispatch);
   dispatch({
     type: GET_GENRE,
   });
@@ -93,6 +82,30 @@ export const getGenresDb = () => async (dispatch) => {
     });
 };
 
+// GETTING GAMES FROM DB
+export const getGamesById = (id) => async (dispatch) => {
+  console.log('get id', dispatch)
+  dispatch({
+    type: GET_GAME_ID,
+  });
+  return await axios
+    .get(`http://localhost:3001/videogames/${id}`)
+    .then((g) => {
+      console.log('data id', g)
+      dispatch({
+        type: GET_GAME_ID_SUCCESS,
+        payload: g.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_GAME_ID_ERROR,
+        payload: err.response,
+      });
+    });
+};
+
+// ORDENAMIENTO ASCENDENTE Y DESCENDENTE RATING Y NAME
 export const orderBy = (sort) => (dispatch, getState) => {
   const orderBy = getState().orderBy;
   const games = getState().gamesState.games.slice();
@@ -214,3 +227,5 @@ export const orderByDesc = (sort) => (dispatch, getState) => {
     }
   }
 };
+
+// FILTER GENRES Y CREATE

@@ -12,6 +12,9 @@ import {
   ORDER_ASC_RATING,
   ORDER_DESC_NAME,
   ORDER_DESC_RATING,
+  GET_GAME_ID,
+  GET_GAME_ID_SUCCESS,
+  GET_GAME_ID_ERROR,
 } from "./../constants";
 
 const initialState = {
@@ -21,10 +24,19 @@ const initialState = {
     error: null,
     loading: false,
   },
+  genresState: {
+    genres: [],
+    error: null,
+    loading: false,
+  },
+  gamesById: {
+    gameId: [],
+    error: null,
+    loading: false,
+  },
   filterGames: [],
   orderBy: "Order By",
   filterBy: "Filter By",
-  loading: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -106,6 +118,60 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filterGames: action.payload.gamesOrder,
         orderBy: action.payload.name,
+      };
+    case GET_GENRE:
+      return {
+        ...state,
+        genresState: {
+          genres: [],
+          error: null,
+          loading: true,
+        },
+      };
+    case GET_GENRE_SUCCESS:
+      return {
+        ...state,
+        genresState: {
+          genres: action.payload,
+          error: null,
+          loading: false,
+        },
+      };
+    case GET_GENRE_ERROR:
+      return {
+        ...state,
+        genresState: {
+          genres: [],
+          error: true,
+          loading: false,
+        },
+      };
+    case GET_GAME_ID:
+      return {
+        ...state,
+        gamesById: {
+          gamesById: [],
+          error: null,
+          loading: true,
+        },
+      };
+    case GET_GAME_ID_SUCCESS:
+      return {
+        ...state,
+        gamesById: {
+          gamesById: action.payload,
+          error: null,
+          loading: false,
+        },
+      };
+    case GET_GAME_ID_ERROR:
+      return {
+        ...state,
+        gamesById: {
+          gamesId: [],
+          error: true,
+          loading: false,
+        },
       };
 
     default:
