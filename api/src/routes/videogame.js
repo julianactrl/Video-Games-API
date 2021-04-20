@@ -31,6 +31,7 @@ server.get("/", async (req, res, next) => {
         platforms: e.platforms,
         released: e.released,
         genres: e.genres.map((g) => g.name).join(", "),
+        source: "Created",
       };
     });
     let gamesApi;
@@ -49,6 +50,7 @@ server.get("/", async (req, res, next) => {
               released: game.released,
               platforms: game.platforms.map((p) => p.platform.name).join(", "),
               genres: game.genres.map((g) => g.name).join(", "),
+              source: "Api",
             };
           });
           pagesApi = pagesApi.concat(gamesApi)
@@ -93,9 +95,9 @@ server.get("/search", async (req, res, next) => {
             released: query.released,
             platforms: query.platforms.map((p) => p.platform.name).join(", "),
             genres: query.genres.map((g) => g.name).join(", "),
+            source: "Api",
           };
         });
-
         res.json(gamesNameApi.concat(gameDb));
       } catch (err) {
         console.error(err);
@@ -135,7 +137,7 @@ server.get("/:id", async (req, res, next) => {
           const newGameObj = {
             id: apiGameRes.id,
             name: apiGameRes.name,
-            description: apiGameRes.description,
+            description: apiGameRes.description_raw,
             image: apiGameRes.background_image,
             rating: apiGameRes.rating,
             released: apiGameRes.released,
@@ -199,7 +201,6 @@ server.post("/", async (req, res, next) => {
       },
       include: Genre,
     });
-
     res.status(200).send("creado");
   } catch (err) {
     next(err);

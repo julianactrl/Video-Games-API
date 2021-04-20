@@ -12,7 +12,7 @@ function App() {
       <>
         <Route exact path="/" component={Landing} />
         <Route exact path="/home" component={Home} />
-        <Route exact path="/details" render={({ match }) => <CardDetails id={match.params.id} />} />
+        <Route exact path="/details/:id" render={({ match }) => <CardDetails id={match.params.id} />} />
         <Route exact path="/form" component={FormGame} />
       </>
     </div>
@@ -20,3 +20,4 @@ function App() {
 }
 
 export default App;
+

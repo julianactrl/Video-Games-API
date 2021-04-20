@@ -15,6 +15,8 @@ import {
   GET_GAME_ID,
   GET_GAME_ID_SUCCESS,
   GET_GAME_ID_ERROR,
+  FILTER_BY_GENRE,
+  FILTER_BY_SOURCE
 } from "./../constants";
 import axios from "axios";
 
@@ -84,17 +86,16 @@ export const getGenresDb = () => async (dispatch) => {
 
 // GETTING GAMES FROM DB
 export const getGamesById = (id) => async (dispatch) => {
-  console.log('get id', dispatch)
+  console.log('get id actions', id)
   dispatch({
     type: GET_GAME_ID,
   });
   return await axios
     .get(`http://localhost:3001/videogames/${id}`)
-    .then((g) => {
-      console.log('data id', g)
+    .then((i) => {
       dispatch({
         type: GET_GAME_ID_SUCCESS,
-        payload: g.data,
+        payload: i.data,
       });
     })
     .catch((err) => {
@@ -108,8 +109,8 @@ export const getGamesById = (id) => async (dispatch) => {
 // ORDENAMIENTO ASCENDENTE Y DESCENDENTE RATING Y NAME
 export const orderBy = (sort) => (dispatch, getState) => {
   const orderBy = getState().orderBy;
-  const games = getState().gamesState.games.slice();
-  const filterGames = getState().filterGames.slice();
+  const games = getState().gamesState.games
+  const filterGames = getState().filterGames
 
   if (orderBy === "Order By") {
     if (sort === "highest") {
@@ -168,8 +169,8 @@ export const orderBy = (sort) => (dispatch, getState) => {
 
 export const orderByDesc = (sort) => (dispatch, getState) => {
   const orderBy = getState().orderBy;
-  const games = getState().gamesState.games.slice();
-  const filterGames = getState().filterGames.slice();
+  const games = getState().gamesState.games
+  const filterGames = getState().filterGames
 
   if (orderBy === "Order By") {
     if (sort === "lowest") {
@@ -229,3 +230,48 @@ export const orderByDesc = (sort) => (dispatch, getState) => {
 };
 
 // FILTER GENRES Y CREATE
+export const filterByGenres = (genres) => (dispatch, getState) => {
+  let filterByGenre = []
+  if (genres === "Filter By") {
+    filterByGenre = getState().gamesState.games
+  } else {
+    filterByGenre = getState()
+      .gamesState.games
+      .filter((game) =>
+        (game.genres || []).includes(genres)
+      )
+  }
+  dispatch({
+    type: FILTER_BY_GENRE,
+    payload: {
+      genres,
+      genreGame: filterByGenre,
+    },
+  });
+};
+
+export const filterBySource = (source) => (dispatch, getState) => {
+  if (source === "Filter By") {
+    const sourceGame = getState().gamesState.games
+    dispatch({
+      type: FILTER_BY_SOURCE,
+      payload: {
+        source,
+        filterSource: sourceGame,
+      },
+    });
+  } else {
+    const gettingSource = getState()
+      .gamesState.games.slice()
+      .filter(g => {
+        return g.source === source
+      });
+    dispatch({
+      type: FILTER_BY_SOURCE,
+      payload: {
+        gettingSource,
+        source,
+      },
+    });
+  }
+};

@@ -103,18 +103,18 @@ __Ruta principal__: debe contener
   - Imagen
   - Nombre
   - Géneros
-- [ ] Botones/Opciones para filtrar por género y por videojuego existente o agregado por nosotros
-- [ ] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los videojuegos por orden alfabético y por rating
+- [ X ] Botones/Opciones para filtrar por género y por videojuego existente o agregado por nosotros
+- [ X ] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los videojuegos por orden alfabético y por rating
 - [ X ] Paginado para ir buscando y mostrando los siguientes videojuegos
 
 __IMPORTANTE__: Dentro de la Ruta Principal se deben mostrar tanto los videjuegos traidos desde la API como así también los de la base de datos. Debido a que en la API existen alrededor de 500 mil juegos, por cuestiones de performance pueden tomar la simplificación de obtener y paginar los primeras 100.
 
 __Ruta de detalle de videojuego__: debe contener
-- [ ] Los campos mostrados en la ruta principal para cada videojuegos (imagen, nombre, y géneros)
-- [ ] Descripción
-- [ ] Fecha de lanzamiento
-- [ ] Rating
-- [ ] Plataformas
+- [ X ] Los campos mostrados en la ruta principal para cada videojuegos (imagen, nombre, y géneros)
+- [ X ] Descripción
+- [ X ] Fecha de lanzamiento
+- [ X ] Rating
+- [ X ] Plataformas
 
 __Ruta de creación de videojuegos__: debe contener
 - [ ] Un formulario __controlado__ con los siguientes campos

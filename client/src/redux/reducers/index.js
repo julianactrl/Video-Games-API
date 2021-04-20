@@ -15,6 +15,8 @@ import {
   GET_GAME_ID,
   GET_GAME_ID_SUCCESS,
   GET_GAME_ID_ERROR,
+  FILTER_BY_GENRE,
+  FILTER_BY_SOURCE,
 } from "./../constants";
 
 const initialState = {
@@ -30,11 +32,12 @@ const initialState = {
     loading: false,
   },
   gamesById: {
-    gameId: [],
+    gamesId: [],
     error: null,
     loading: false,
   },
   filterGames: [],
+  genres: [],
   orderBy: "Order By",
   filterBy: "Filter By",
 };
@@ -146,11 +149,23 @@ const rootReducer = (state = initialState, action) => {
           loading: false,
         },
       };
+    case FILTER_BY_GENRE:
+      return {
+        ...state,
+        filterGames: action.payload.genreGame,
+        filterBy: action.payload.genres,
+      };
+    case FILTER_BY_SOURCE:
+      return {
+        ...state,
+        filterGames: action.payload.gettingSource,
+        filterBy: action.payload.source,
+      };
     case GET_GAME_ID:
       return {
         ...state,
         gamesById: {
-          gamesById: [],
+          gamesId: {},
           error: null,
           loading: true,
         },
@@ -159,7 +174,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         gamesById: {
-          gamesById: action.payload,
+          gamesId: action.payload,
           error: null,
           loading: false,
         },
@@ -168,7 +183,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         gamesById: {
-          gamesId: [],
+          gamesId: {},
           error: true,
           loading: false,
         },
