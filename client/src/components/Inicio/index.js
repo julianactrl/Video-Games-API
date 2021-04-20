@@ -48,7 +48,7 @@ const Inicio = () => {
   console.log(page);
 
   return (
-    <div className="container">
+    <div className="container_home">
       <header className="header">
         <button className="img" onClick={handleClick}>
           <img src={mushroom} alt="logo" />

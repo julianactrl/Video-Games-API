@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
+.container_home {
+  text-align: center;
+  background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+}
 .header {
   max-width: 100%;
   background: #ce0a0a;
