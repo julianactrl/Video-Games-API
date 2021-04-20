@@ -17,6 +17,9 @@ import {
   GET_GAME_ID_ERROR,
   FILTER_BY_GENRE,
   FILTER_BY_SOURCE,
+  ADD_NEW_GAME,
+  ADD_NEW_GAME_SUCCESS,
+  ADD_NEW_GAME_ERROR
 } from "./../constants";
 
 const initialState = {
@@ -36,6 +39,7 @@ const initialState = {
     error: null,
     loading: false,
   },
+  addNewGame : null,
   filterGames: [],
   genres: [],
   orderBy: "Order By",
@@ -71,6 +75,11 @@ const rootReducer = (state = initialState, action) => {
           loading: false,
         },
       };
+    case ADD_NEW_GAME:
+      return {
+        ...state,
+        addNewGame: action.payload
+      }
     case SEARCH_GAMES:
       return {
         ...state,

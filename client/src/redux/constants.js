@@ -31,3 +31,8 @@ export const GET_GAME_ID_ERROR = "GET_GAME_ID_ERROR"
 // FILTER
 export const FILTER_BY_GENRE = "FILTER_BY_GENRE"
 export const FILTER_BY_SOURCE = "FILTER_BY_SOURCE"
+
+// add new game
+export const ADD_NEW_GAME = "ADD_NEW_GAME"
+export const ADD_NEW_GAME_SUCCESS = "ADD_NEW_GAME_SUCCESS"
+export const ADD_NEW_GAME_ERROR = "ADD_NEW_GAME_ERROR"

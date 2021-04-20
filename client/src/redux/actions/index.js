@@ -16,7 +16,10 @@ import {
   GET_GAME_ID_SUCCESS,
   GET_GAME_ID_ERROR,
   FILTER_BY_GENRE,
-  FILTER_BY_SOURCE
+  FILTER_BY_SOURCE,
+  ADD_NEW_GAME,
+  ADD_NEW_GAME_SUCCESS,
+  ADD_NEW_GAME_ERROR
 } from "./../constants";
 import axios from "axios";
 
@@ -79,6 +82,28 @@ export const getGenresDb = () => async (dispatch) => {
     .catch((err) => {
       dispatch({
         type: GET_GENRE_ERROR,
+        payload: err.response,
+      });
+    });
+};
+
+// POST A NEW GAME
+export const postNewGame = (body) => async (dispatch) => {
+  console.log('soy el body', body)
+  dispatch({
+    type: ADD_NEW_GAME,
+  });
+  return await axios
+    .post(`http://localhost:3001/videogames` , body)
+    .then((p) => {
+      dispatch({
+        type: ADD_NEW_GAME_SUCCESS,
+        payload: p.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: ADD_NEW_GAME_ERROR,
         payload: err.response,
       });
     });
