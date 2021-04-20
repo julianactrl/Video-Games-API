@@ -1,8 +1,19 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,400&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
 .container_form {
   max-width: 400px;
   width: 100%;
   margin: 0 auto;
   position: relative;
+  background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
 }
 
 #form_game input[type="text"],
@@ -17,7 +28,7 @@
 #form_game {
   background: #f9f9f9;
   padding: 25px;
-  margin: 150px 0;
+  margin: 12px 0;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
@@ -35,6 +46,22 @@
   font-weight: 400;
 }
 
+select[multiple] {
+  /* // A reset of styles, including removing the default dropdown arrow */
+  appearance: none;
+  /* // Additional resets for further consistency */
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  outline: none;
+}
+
 fieldset {
   border: medium none !important;
   margin: 0 0 10px;
@@ -44,9 +71,9 @@ fieldset {
 }
 
 #form_game input[type="text"],
-#form_game input[type="email"],
-#form_game input[type="tel"],
-#form_game input[type="url"],
+#form_game input[type="number"],
+#form_game input[type="date"],
+#form_game input[type=""],
 #form_game textarea {
   width: 100%;
   border: 1px solid #ccc;
@@ -56,9 +83,9 @@ fieldset {
 }
 
 #form_game input[type="text"]:hover,
-#form_game input[type="email"]:hover,
-#form_game input[type="tel"]:hover,
-#form_game input[type="url"]:hover,
+#form_game input[type="date"]:hover,
+#form_game input[type="number"]:hover,
+#form_game input[type=""]:hover,
 #form_game textarea:hover {
   -webkit-transition: border-color 0.3s ease-in-out;
   -moz-transition: border-color 0.3s ease-in-out;
@@ -94,9 +121,6 @@ fieldset {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.copyright {
-  text-align: center;
-}
 
 #form_game input:focus,
 #form_game textarea:focus {
@@ -118,4 +142,12 @@ fieldset {
 
 :-ms-input-placeholder {
   color: #888;
+}
+
+.swal-overlay {
+  background-color: rgba(43, 165, 137, 0.45);
+}
+.swal-modal {
+  background-color: rgba(63,255,106,0.69);
+  border: 3px solid white;
 }
