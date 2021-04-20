@@ -17,13 +17,13 @@ const Inicio = () => {
   const dispatch = useDispatch();
   let history = useHistory();
   const handleClick = () => history.push("/");
+  const handleGame = () => history.push("/add");
 
   // Redux States
   const { games, search, loading, error } = useSelector(
     (state) => state.gamesState
   );
   const filterBy = useSelector((state) => state.filterBy);
-  //const loading = useSelector((state) => state.loading);
   const orderBy = useSelector((state) => state.orderBy);
   const filterGames = useSelector((state) => state.filterGames);
   let allGames;
@@ -58,8 +58,10 @@ const Inicio = () => {
         </div>
         <div className="navbar">
           <div className="contenido">
-            <div className="add">
-              <Link to="/add">Add new game</Link>
+            <div class="addGame">
+              <button className="button_game" onChange={handleGame}>
+                Add a new game
+              </button>
             </div>
             <div className="filter">
               <Filter />

@@ -152,3 +152,65 @@ export const orderBy = (sort) => (dispatch, getState) => {
     }
   }
 };
+
+export const orderByDesc = (sort) => (dispatch, getState) => {
+  const orderBy = getState().orderBy;
+  const games = getState().gamesState.games.slice();
+  const filterGames = getState().filterGames.slice();
+
+  if (orderBy === "Order By") {
+    if (sort === "lowest") {
+      const gamesOrder = games.sort(
+        (a, b) => b.rating - a.rating
+      );
+      dispatch({
+        type: ORDER_DESC_RATING,
+        payload: {
+          gamesOrder,
+          name: sort,
+        },
+      });
+    }
+    if (sort === "za") {
+      const gamesOrder = games.sort((a, b) => {
+        if (a.name < b.name) return 1
+        if (a.name > b.name) return -1
+        return 0
+      });
+      dispatch({
+        type: ORDER_DESC_NAME,
+        payload: {
+          gamesOrder,
+          name: sort,
+        },
+      });
+    }
+  } else {
+    if (sort === "lowest") {
+      const gamesOrder = filterGames.sort(
+        (a, b) => b.rating - a.rating
+      );
+      dispatch({
+        type: ORDER_DESC_RATING,
+        payload: {
+          gamesOrder,
+          name: sort,
+        },
+      });
+    }
+    if (sort === "za") {
+      const gamesOrder = filterGames.sort((a, b) => {
+        if (a.name < b.name) return 1
+        if (a.name > b.name) return -1
+        return 0
+      });
+      dispatch({
+        type: ORDER_DESC_NAME,
+        payload: {
+          gamesOrder,
+          name: sort,
+        },
+      });
+    }
+  }
+};

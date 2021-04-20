@@ -18,7 +18,7 @@
   
   .searchTerm {
     width: 100%;
-    border: 3px solid #15100f;
+    border: 3px solid #2c3e50;
     border-right: none;
     padding: 5px;
     height: 20px;
@@ -35,7 +35,7 @@
     width: 40px;
     height: 36px;
     border: 1px solid #15100f;
-    background: #15100f;
+    background: #2c3e50;
     text-align: center;
     color: #fff;
     border-radius: 0 5px 5px 0;

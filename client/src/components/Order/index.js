@@ -1,23 +1,29 @@
 import React from "react";
+import './styles.css'
 import { useDispatch } from "react-redux";
-import { orderBy } from "../../redux/actions";
+import { orderBy, orderByDesc} from "../../redux/actions";
 
 const Order = () => {
   const dispatch = useDispatch();
   // ordenamiento alfabetico
   const onOrderChange = (e) => {
-    dispatch(orderBy(e.target.value));
+    if(e.target.value === "az" || e.target.value === "highest") {
+      dispatch(orderBy(e.target.value))
+    } else {
+      dispatch(orderByDesc(e.target.value));
+    }
   };
+
   return (
-    <>
-      <select onChange={onOrderChange}>
+    <div className="select">
+      <select name="slct" id="slct" onChange={onOrderChange}>
         <option default>Order By</option>
         <option value="az">A - Z</option>
         <option value="za">Z - A</option>
         <option value="lowest">Rating lowest</option>
         <option value="highest">Rating highest</option>
       </select>
-    </>
+    </div>
   );
 };
 

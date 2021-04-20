@@ -1,17 +1,6 @@
 .header {
   max-width: 100%;
-  background: #cb356b; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #bd3f32,
-    #cb356b
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #bd3f32,
-    #cb356b
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background: #ce0a0a;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -33,21 +22,58 @@
   width: 300px;
 }
 .navbar {
-  width: 300px;
-  
+  width: 500px;
 }
 .contenido {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   color: aliceblue;
   font-weight: 600;
 }
-.navbar .contenido a{
+.navbar .contenido a {
   text-decoration: none;
   color: aliceblue;
 }
-.navbar .contenido a:hover{
+.navbar .contenido a:hover {
   color: black;
+}
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #2c3e50;
+  background-image: none;
+}
+/* Remove IE arrow */
+.button_game::-ms-expand {
+  display: none;
+}
+
+.addGame {
+  position: relative;
+  display: flex;
+  width: 10em;
+  height: 2.5rem;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: 0.25em;
+}
+.button_game {
+  flex: 1;
+  padding: 0 0.5em;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+/* Transition */
+.addGame:hover {
+  color: #f39c12;
 }

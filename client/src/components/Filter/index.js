@@ -1,10 +1,16 @@
 import React from "react";
+import './styles.css'
+import { useDispatch, useSelector } from "react-redux";
+import { } from "../../redux/actions";
 
 const Filter = ({genres}) => {
+  const dispatch = useDispatch()
+  const state = useSelector(state => state.state)
+  
   return (
-    <>
+    <div className="filter">
       <select>
-        <option>---Filter By---</option>
+        <option defaultValue>Filter By </option>
         <option value="api">Existed</option>
         <option value="created">Created</option>
         {/* {genres.map((g) => (
@@ -12,7 +18,7 @@ const Filter = ({genres}) => {
         ))} */}
         {/* <option value="genre">Genre</option> */}
       </select>
-    </>
+    </div>
   );
 };
 
