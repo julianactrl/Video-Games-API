@@ -25,7 +25,7 @@ const Filter = () => {
 
   return (
     <div className="filter">
-      <select onChange={(e) => handleFilter(e)}>
+      <select onChange={handleFilter}>
         <option defaultValue>Filter By </option>
         <option value="Api">Existed</option>
         <option value="Created">Created</option>

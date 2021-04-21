@@ -17,7 +17,7 @@ const Order = () => {
   return (
     <div className="select">
       <select name="slct" id="slct" onChange={onOrderChange}>
-        <option default>Order By</option>
+        <option defaultValue>Order By</option>
         <option value="az">A - Z</option>
         <option value="za">Z - A</option>
         <option value="lowest">Rating lowest</option>

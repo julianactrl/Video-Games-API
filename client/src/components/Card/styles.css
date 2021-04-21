@@ -27,10 +27,11 @@
   color: whitesmoke;
 }
 
-.detail h4 {
+.detail p {
   margin-top: 4px;
   color: whitesmoke;
   font-family: 'Play', sans-serif;
+  font-size: small;
 }
 
 .detail button {

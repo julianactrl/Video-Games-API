@@ -19,10 +19,9 @@ import {
   FILTER_BY_SOURCE,
   ADD_NEW_GAME,
   ADD_NEW_GAME_SUCCESS,
-  ADD_NEW_GAME_ERROR
+  ADD_NEW_GAME_ERROR,
 } from "./../constants";
 import axios from "axios";
-
 
 // GETTING ALL GAMES FROM API AND DB 137
 export const getAllGames = () => async (dispatch) => {
@@ -89,12 +88,12 @@ export const getGenresDb = () => async (dispatch) => {
 
 // POST A NEW GAME
 export const postNewGame = (body) => async (dispatch) => {
-  console.log('soy el body', body)
+  console.log("soy el body", body);
   dispatch({
     type: ADD_NEW_GAME,
   });
   return await axios
-    .post(`http://localhost:3001/videogames` , body)
+    .post(`http://localhost:3001/videogames`, body)
     .then((p) => {
       dispatch({
         type: ADD_NEW_GAME_SUCCESS,
@@ -111,16 +110,17 @@ export const postNewGame = (body) => async (dispatch) => {
 
 // GETTING GAMES FROM DB
 export const getGamesById = (id) => async (dispatch) => {
-  console.log('get id actions', id)
+  console.log("get id actions", id);
   dispatch({
     type: GET_GAME_ID,
   });
   return await axios
     .get(`http://localhost:3001/videogames/${id}`)
     .then((i) => {
+      const result = i.data;
       dispatch({
         type: GET_GAME_ID_SUCCESS,
-        payload: i.data,
+        payload: result,
       });
     })
     .catch((err) => {
@@ -133,9 +133,9 @@ export const getGamesById = (id) => async (dispatch) => {
 
 // ORDENAMIENTO ASCENDENTE Y DESCENDENTE RATING Y NAME
 export const orderBy = (sort) => (dispatch, getState) => {
-  const orderBy = getState().orderBy;
-  const games = getState().gamesState.games
-  const filterGames = getState().filterGames
+  const orderBy = getState().orderBy.slice();
+  const games = getState().gamesState.games.slice();
+  const filterGames = getState().filterGames.slice();
 
   if (orderBy === "Order By") {
     if (sort === "highest") {
@@ -147,11 +147,11 @@ export const orderBy = (sort) => (dispatch, getState) => {
           name: sort,
         },
       });
-    } 
+    }
     if (sort === "az") {
       const gamesOrder = games.sort((a, b) => {
-        if (a.name > b.name) return 1
-        if (a.name < b.name) return -1
+        if (a.name > b.name) return 1;
+        if (a.name < b.name) return -1;
         return 0;
       });
       dispatch({
@@ -164,9 +164,7 @@ export const orderBy = (sort) => (dispatch, getState) => {
     }
   } else {
     if (sort === "highest") {
-      const gamesOrder = filterGames.sort(
-        (a, b) => a.rating - b.rating
-      );
+      const gamesOrder = filterGames.sort((a, b) => a.rating - b.rating);
       dispatch({
         type: ORDER_ASC_RATING,
         payload: {
@@ -177,8 +175,8 @@ export const orderBy = (sort) => (dispatch, getState) => {
     }
     if (sort === "az") {
       const gamesOrder = filterGames.sort((a, b) => {
-        if (a.name > b.name) return 1
-        if (a.name < b.name) return -1
+        if (a.name > b.name) return 1;
+        if (a.name < b.name) return -1;
         return 0;
       });
       dispatch({
@@ -193,15 +191,13 @@ export const orderBy = (sort) => (dispatch, getState) => {
 };
 
 export const orderByDesc = (sort) => (dispatch, getState) => {
-  const orderBy = getState().orderBy;
-  const games = getState().gamesState.games
-  const filterGames = getState().filterGames
+  const orderBy = getState().orderBy.slice();
+  const games = getState().gamesState.games;
+  const filterGames = getState().filterGames;
 
   if (orderBy === "Order By") {
     if (sort === "lowest") {
-      const gamesOrder = games.sort(
-        (a, b) => b.rating - a.rating
-      );
+      const gamesOrder = games.sort((a, b) => b.rating - a.rating);
       dispatch({
         type: ORDER_DESC_RATING,
         payload: {
@@ -212,9 +208,9 @@ export const orderByDesc = (sort) => (dispatch, getState) => {
     }
     if (sort === "za") {
       const gamesOrder = games.sort((a, b) => {
-        if (a.name < b.name) return 1
-        if (a.name > b.name) return -1
-        return 0
+        if (a.name < b.name) return 1;
+        if (a.name > b.name) return -1;
+        return 0;
       });
       dispatch({
         type: ORDER_DESC_NAME,
@@ -226,9 +222,7 @@ export const orderByDesc = (sort) => (dispatch, getState) => {
     }
   } else {
     if (sort === "lowest") {
-      const gamesOrder = filterGames.sort(
-        (a, b) => b.rating - a.rating
-      );
+      const gamesOrder = filterGames.sort((a, b) => b.rating - a.rating);
       dispatch({
         type: ORDER_DESC_RATING,
         payload: {
@@ -239,9 +233,9 @@ export const orderByDesc = (sort) => (dispatch, getState) => {
     }
     if (sort === "za") {
       const gamesOrder = filterGames.sort((a, b) => {
-        if (a.name < b.name) return 1
-        if (a.name > b.name) return -1
-        return 0
+        if (a.name < b.name) return 1;
+        if (a.name > b.name) return -1;
+        return 0;
       });
       dispatch({
         type: ORDER_DESC_NAME,
@@ -256,15 +250,13 @@ export const orderByDesc = (sort) => (dispatch, getState) => {
 
 // FILTER GENRES Y CREATE
 export const filterByGenres = (genres) => (dispatch, getState) => {
-  let filterByGenre = []
+  let filterByGenre = [];
   if (genres === "Filter By") {
-    filterByGenre = getState().gamesState.games
+    filterByGenre = getState().gamesState.games;
   } else {
-    filterByGenre = getState()
-      .gamesState.games
-      .filter((game) =>
-        (game.genres || []).includes(genres)
-      )
+    filterByGenre = getState().gamesState.games.filter((game) =>
+      (game.genres || []).includes(genres)
+    );
   }
   dispatch({
     type: FILTER_BY_GENRE,
@@ -277,7 +269,7 @@ export const filterByGenres = (genres) => (dispatch, getState) => {
 
 export const filterBySource = (source) => (dispatch, getState) => {
   if (source === "Filter By") {
-    const sourceGame = getState().gamesState.games
+    const sourceGame = getState().gamesState.games;
     dispatch({
       type: FILTER_BY_SOURCE,
       payload: {
@@ -288,8 +280,8 @@ export const filterBySource = (source) => (dispatch, getState) => {
   } else {
     const gettingSource = getState()
       .gamesState.games.slice()
-      .filter(g => {
-        return g.source === source
+      .filter((g) => {
+        return g.source === source;
       });
     dispatch({
       type: FILTER_BY_SOURCE,

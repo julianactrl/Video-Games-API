@@ -20,9 +20,10 @@ const Home = () => {
   const handleGame = () => history.push("/form");
 
   // Redux States
-  const { games, search, loading, error } = useSelector(
+  const { games, loading, error } = useSelector(
     (state) => state.gamesState
   );
+ 
   const filterBy = useSelector((state) => state.filterBy);
   const orderBy = useSelector((state) => state.orderBy);
   const filterGames = useSelector((state) => state.filterGames);
@@ -73,7 +74,7 @@ const Home = () => {
         </div>
       </header>
       <h1 className="main-title">Discover all games we have for you</h1>
-      <Cards games={page} loading={loading} error={error} search={search} />
+      <Cards games={page} loading={loading} error={error} />
       <Pagination
         cardPerPage={cardPerPage}
         totalVideogames={allGames.length}

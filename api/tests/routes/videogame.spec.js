@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const { expect } = require('chai');
+const {expect}  = require('chai');
 const session = require('supertest-session');
 const app = require('../../src/app.js');
 const { Videogame, conn } = require('../../src/db.js');
@@ -7,6 +7,11 @@ const { Videogame, conn } = require('../../src/db.js');
 const agent = session(app);
 const videogame = {
   name: 'Super Mario Bros',
+  description: "prueba",
+  platforms: "pc, tablet",
+  released: "12/08/2021",
+  rating: 4,
+  genres: ["Action", "Shooter"],
 };
 
 describe('Videogame routes', () => {

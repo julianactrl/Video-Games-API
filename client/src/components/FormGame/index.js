@@ -6,7 +6,7 @@ import "./styles.css";
 import swal from "sweetalert";
 
 const FormGame = () => {
-  const history = useHistory()
+  const history = useHistory();
 
   const initGame = {
     name: "",
@@ -15,18 +15,18 @@ const FormGame = () => {
     rating: 0,
     genres: [],
     platforms: "",
-  }
-  const [game, setGame] = useState(initGame)
-
-  const dispatch = useDispatch()
-  const genresRedux = useSelector((state) => state.genresState.genres)
+  };
+  const [game, setGame] = useState(initGame);
+  console.log(game);
+  const dispatch = useDispatch();
+  const genresRedux = useSelector((state) => state.genresState.genres);
 
   useEffect(() => {
-    dispatch(getGenresDb())
-  }, [])
+    dispatch(getGenresDb());
+  }, []);
 
   const gameDb = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const gameSend = {
       name: game.name,
       description: game.description,
@@ -34,18 +34,20 @@ const FormGame = () => {
       rating: game.rating,
       genres: game.genres,
       platforms: game.platforms,
-    }
-    dispatch(postNewGame(gameSend))
+    };
+    console.log(gameSend);
+    dispatch(postNewGame(gameSend));
     e.target.reset();
     swal("Game created succesfully!", {
       buttons: false,
       timer: 1000,
-    })
-  }
+    });
+  };
 
   const handleInputChange = (e) => {
     if (e.target.name === "genres") {
       const arr = game[e.target.name];
+      console.log("soy el arr", arr);
       setGame({
         ...game,
         [e.target.name]: arr.concat(e.target.value),
@@ -54,18 +56,19 @@ const FormGame = () => {
       setGame({
         ...game,
         [e.target.name]: e.target.value,
-      })
+      });
     }
-  }  
+  };
 
   return (
     <div className="container_form">
-      <form id="form_game" onSubmit={(e) => gameDb(e)}  onChange={(e) => handleInputChange(e)}>
+      <form id="form_game" onSubmit={gameDb}>
         <h3>Create your video game</h3>
         <h4>Use your imagination</h4>
         <fieldset>
           <input
             value={game.name}
+            onChange={handleInputChange}
             name="name"
             placeholder="Give it a name"
             type="text"
@@ -76,16 +79,19 @@ const FormGame = () => {
         </fieldset>
         <fieldset>
           <textarea
+            onChange={handleInputChange}
             value={game.description}
             name="description"
             type="text"
             placeholder="Tell us what about is it..."
             tabIndex="5"
+            autoFocus
             required
           ></textarea>
         </fieldset>
         <fieldset>
           <input
+            onChange={handleInputChange}
             value={game.released}
             name="released"
             placeholder="Released"
@@ -96,6 +102,7 @@ const FormGame = () => {
         </fieldset>
         <fieldset>
           <input
+            onChange={handleInputChange}
             value={game.rating}
             name="rating"
             placeholder="Rating"
@@ -106,6 +113,7 @@ const FormGame = () => {
         </fieldset>
         <fieldset>
           <input
+            onChange={handleInputChange}
             value={game.platforms}
             name="platforms"
             placeholder="What Platforms are going hold"
@@ -116,17 +124,22 @@ const FormGame = () => {
         </fieldset>
         <fieldset className="select_field">
           <label>Select the genres for your game</label>
-          <select className="select_genres" multiple={true}>
-            {genresRedux && genresRedux.map((g) => (
-              <option
-                value={g.name}
-                name="genres"  
-                key={g.id}
-              >
-                {g.name}
-              </option>
+          <span className="select_genres">
+            {genresRedux.map((g) => (
+              <div key={g.id}>
+                <label className="container_checkbox">
+                  {g.name}
+                  <input
+                    onChange={handleInputChange}
+                    type="checkbox"
+                    name="genres"
+                    value={g.name}
+                  ></input>
+                  <span className="checkmark"></span>
+                </label>
+              </div>
             ))}
-          </select>
+          </span>
         </fieldset>
         <fieldset>
           <button

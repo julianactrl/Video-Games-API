@@ -18,14 +18,11 @@ import {
   FILTER_BY_GENRE,
   FILTER_BY_SOURCE,
   ADD_NEW_GAME,
-  ADD_NEW_GAME_SUCCESS,
-  ADD_NEW_GAME_ERROR
 } from "./../constants";
 
 const initialState = {
   gamesState: {
     games: [],
-    search: [],
     error: null,
     loading: false,
   },
@@ -84,7 +81,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         gamesState: {
-          search: [],
+          games: [],
           error: null,
           loading: true,
         },
@@ -93,7 +90,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         gamesState: {
-          search: action.payload,
+          games: action.payload,
           error: null,
           loading: false,
         },
@@ -102,7 +99,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         gamesState: {
-          search: [],
+          games: [],
           error: true,
           loading: false,
         },
@@ -174,7 +171,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         gamesById: {
-          gamesId: {},
+          gamesId: [],
           error: null,
           loading: true,
         },
@@ -192,7 +189,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         gamesById: {
-          gamesId: {},
+          gamesId: [],
           error: true,
           loading: false,
         },

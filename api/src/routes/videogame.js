@@ -3,7 +3,8 @@ const { GAMES_ALL, SEARCH_GAMES, GAMES_ID, API_KEY } = process.env;
 const axios = require("axios");
 const server = require("express").Router();
 const { Videogame, Genre } = require("../db.js");
-const { Op } = require("sequelize");
+const { Op, Col } = require("sequelize");
+const { name } = require("../app.js");
 // server.get("/", async (req, res, next) => {
 //   const games_api = axios.get(`${GAMES_ALL}${API_KEY}`)
 //   const genre_db = Videogame.findAll()
@@ -25,6 +26,7 @@ server.get("/", async (req, res, next) => {
     const gamesDbAll = await Videogame.findAll({ include: [Genre] });
     const select = gamesDbAll.map((e) => {
       return {
+        id: e.id,
         name: e.name,
         description: e.description,
         rating: e.rating,
@@ -35,8 +37,8 @@ server.get("/", async (req, res, next) => {
       };
     });
     let gamesApi;
-    let pagesApi = []
-   // console.log("soy el array", pagesApi)
+    let pagesApi = [];
+    // console.log("soy el array", pagesApi)
     for (let i = 1; i <= 5; i++) {
       let result = await axios
         .get(`${GAMES_ALL}${API_KEY}&page=${i}`)
@@ -53,11 +55,11 @@ server.get("/", async (req, res, next) => {
               source: "Api",
             };
           });
-          pagesApi = pagesApi.concat(gamesApi)
+          pagesApi = pagesApi.concat(gamesApi);
         })
         .catch((err) => next(err));
     }
-    // const arraysDbApi = 
+    // const arraysDbApi =
     // console.log(arraysDbApi)
     res.status(200).send(pagesApi.concat(select));
   } catch (err) {
@@ -85,8 +87,8 @@ server.get("/search", async (req, res, next) => {
           },
         });
         const queryResultName = query.data.results;
-        const apiSliceQuery = queryResultName.slice(0, 15);
-        const gamesNameApi = apiSliceQuery.map((query) => {
+        // const apiSliceQuery = queryResultName.slice(0, 15);
+        const gamesNameApi = queryResultName.map((query) => {
           return {
             id: query.id,
             name: query.name,
@@ -98,10 +100,10 @@ server.get("/search", async (req, res, next) => {
             source: "Api",
           };
         });
-        res.json(gamesNameApi.concat(gameDb));
+        res.status(200).json(gamesNameApi.concat(gameDb));
       } catch (err) {
         console.error(err);
-        res.json({ message: "ERROR: GAME NOT FOUNT" });
+        res.sendStatus(400).json({ message: "ERROR: GAME NOT FOUNT" });
       }
     })
     .catch((err) => next(err));
@@ -124,10 +126,15 @@ server.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     //  console.log(id);
-    const gameIdDb = await Videogame.findOne({
+    let gameIdDb = await Videogame.findOne({
       where: { id: id },
-      include: [Genre],
-    });
+      attributes: ['name', 'description', 'rating', 'released', 'platforms'],
+      include: {
+        model: Genre  
+      }
+    })
+    
+   
     if (!gameIdDb) {
       await axios
         .get(`${GAMES_ID}${id}?key=${API_KEY}`)
@@ -145,12 +152,13 @@ server.get("/:id", async (req, res, next) => {
               .map((p) => p.platform.name)
               .join(", "),
             genres: apiGameRes.genres.map((g) => g.name).join(", "),
+            source: 'Api'
           };
-          res.send(newGameObj);
+          res.status(200).json(newGameObj);
         })
         .catch((err) => next(err));
     } else {
-      res.send(gameIdDb);
+      res.status(200).json(gameIdDb);
     }
   } catch (err) {
     next(err);
@@ -201,7 +209,7 @@ server.post("/", async (req, res, next) => {
       },
       include: Genre,
     });
-    res.status(200).send("creado");
+    res.status(200).send("Creado con exitos");
   } catch (err) {
     next(err);
   }
