@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import videoGame from "../../assets/video-games.png";
 import mushroom from "../../assets/mushroom.png";
+
 
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader";
@@ -34,7 +36,8 @@ const CardDetails = ({ id }) => {
           <h1>{gamesId.name}</h1>
           <div className="details">
             <div className="image">
-              <img src={gamesId.image} alt={gamesId.name} />
+              <img src={gamesId.image ? gamesId.image : videoGame} alt="no image" /> 
+                
             </div>
             <div className="text">
               <h2>Description</h2>
@@ -47,7 +50,7 @@ const CardDetails = ({ id }) => {
             <div className="Genres">
               <div className="genres">
                 <h2>Genres</h2>
-                {gamesId.genres}
+                {gamesId.genres && gamesId.genres.map((g) => { return <p>{g.name}</p> })}
               </div>
             </div>
             <div className="Platforms">

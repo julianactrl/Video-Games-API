@@ -12,9 +12,7 @@ const Cards = ({ games, loading, error }) => {
         ) : error ? (
           <div>{error}</div>
         ) : (
-           games ? games.map((data, id) => <Card data={data} key={id} />) 
-          :
-          <div>No works</div>
+          games.map((data, id) => <Card data={data} key={id} />)
         )}
       </div>
     </div>

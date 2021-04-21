@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import "./styles.css";
+import videoGame from "../../assets/video-games.png";
 
 const Card = ({ data }) => {
   let history = useHistory();
@@ -9,7 +10,7 @@ const Card = ({ data }) => {
   return (
     <div className="card">
       <div className="image">
-        <img src={data.image} alt="no image" />
+        <img src={data.image ? data.image : videoGame } alt="no image" />
       </div>
       <div className="detail">
         <h3>{data.name}</h3>

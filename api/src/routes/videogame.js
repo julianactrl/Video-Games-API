@@ -131,7 +131,6 @@ server.get("/:id", async (req, res, next) => {
       attributes: ['name', 'description', 'rating', 'released', 'platforms'],
       include: {
         model: Genre,
-        // attributes: ['id', 'name'] 
         attributes: { exclude: ['createdAt', 'updatedAt', 'videogame_genre', 'id'] },
         through: { attributes: [] },
       }
@@ -153,8 +152,7 @@ server.get("/:id", async (req, res, next) => {
             platforms: apiGameRes.platforms
               .map((p) => p.platform.name)
               .join(", "),
-            genres: apiGameRes.genres.map((g) => g.name).join(", "),
-            
+            genres: apiGameRes.genres,            
           };
           res.status(200).json(newGameObj);
         })

@@ -7,6 +7,10 @@
   box-sizing: border-box;
 }
 
+.background {
+  background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+
+}
 
 .container_form {
   max-width: 400px;
@@ -97,6 +101,7 @@
   font-size: 30px;
   font-weight: 300;
   margin-bottom: 10px;
+  margin-top: 0;
 }
 
 #form_game h4 {
@@ -106,21 +111,7 @@
   font-weight: 400;
 }
 
-select[multiple] {
-  /* // A reset of styles, including removing the default dropdown arrow */
-  appearance: none;
-  /* // Additional resets for further consistency */
-  background-color: transparent;
-  border: none;
-  padding: 0 1em 0 0;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: inherit;
-  line-height: inherit;
-  outline: none;
-}
+
 
 fieldset {
   border: medium none !important;
@@ -162,12 +153,18 @@ fieldset {
 #form_game button[type="submit"] {
   cursor: pointer;
   width: 100%;
-  border: none;
+  /* border: none;
   background: #4caf50;
   color: #fff;
   margin: 0 0 5px;
   padding: 10px;
-  font-size: 15px;
+  font-size: 15px; */
+  border-radius: 9px;
+  background:#a70321;
+  color: whitesmoke;
+  border: 2px solid;
+  padding: 7px 13px;
+  box-shadow: 0 0 8px #fff;
 }
 
 #form_game button[type="submit"]:hover {
