@@ -130,10 +130,12 @@ server.get("/:id", async (req, res, next) => {
       where: { id: id },
       attributes: ['name', 'description', 'rating', 'released', 'platforms'],
       include: {
-        model: Genre  
+        model: Genre,
+        // attributes: ['id', 'name'] 
+        attributes: { exclude: ['createdAt', 'updatedAt', 'videogame_genre', 'id'] },
+        through: { attributes: [] },
       }
     })
-    
    
     if (!gameIdDb) {
       await axios
@@ -152,7 +154,7 @@ server.get("/:id", async (req, res, next) => {
               .map((p) => p.platform.name)
               .join(", "),
             genres: apiGameRes.genres.map((g) => g.name).join(", "),
-            source: 'Api'
+            
           };
           res.status(200).json(newGameObj);
         })
