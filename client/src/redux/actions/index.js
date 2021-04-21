@@ -118,7 +118,7 @@ export const getGamesById = (id) => async (dispatch) => {
     .get(`http://localhost:3001/videogames/${id}`)
     .then((i) => {
       const result = i.data;
-     
+
       dispatch({
         type: GET_GAME_ID_SUCCESS,
         payload: result,

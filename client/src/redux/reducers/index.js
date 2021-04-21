@@ -36,7 +36,7 @@ const initialState = {
     error: null,
     loading: false,
   },
-  addNewGame : null,
+  addNewGame: null,
   filterGames: [],
   genres: [],
   orderBy: "Order By",
@@ -75,8 +75,8 @@ const rootReducer = (state = initialState, action) => {
     case ADD_NEW_GAME:
       return {
         ...state,
-        addNewGame: action.payload
-      }
+        addNewGame: action.payload,
+      };
     case SEARCH_GAMES:
       return {
         ...state,

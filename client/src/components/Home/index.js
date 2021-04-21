@@ -20,10 +20,8 @@ const Home = () => {
   const handleGame = () => history.push("/form");
 
   // Redux States
-  const { games, loading, error } = useSelector(
-    (state) => state.gamesState
-  );
- 
+  const { games, loading, error } = useSelector((state) => state.gamesState);
+
   const filterBy = useSelector((state) => state.filterBy);
   const orderBy = useSelector((state) => state.orderBy);
   const filterGames = useSelector((state) => state.filterGames);

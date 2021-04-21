@@ -84,10 +84,10 @@ A continuación se detallaran los requerimientos mínimos para la aprobación de
 __IMPORTANTE__: No se permitirá utilizar librerías externas para aplicar estilos a la aplicación. Tendrán que utilizar CSS con algunas de las opciones que vimos en dicha clase (CSS puro, CSS Modules o Styled Components)
 
 #### Tecnologías necesarias:
-- [ ] React
-- [ ] Redux
-- [ ] Express
-- [ ] Sequelize - Postgres
+- [ X ] React
+- [ X ] Redux
+- [ X ] Express
+- [ X ] Sequelize - Postgres
 
 #### Frontend
 
@@ -117,14 +117,14 @@ __Ruta de detalle de videojuego__: debe contener
 - [ X ] Plataformas
 
 __Ruta de creación de videojuegos__: debe contener
-- [ ] Un formulario __controlado__ con los siguientes campos
+- [ X ] Un formulario __controlado__ con los siguientes campos
   - Nombre
   - Descripción
   - Fecha de lanzamiento
   - Rating
-- [ ] Posibilidad de seleccionar/agregar varios géneros
-- [ ] Posibilidad de seleccionar/agregar varias plataformas
-- [ ] Botón/Opción para crear un nuevo videojuego
+- [ X ] Posibilidad de seleccionar/agregar varios géneros
+- [ X ] Posibilidad de seleccionar/agregar varias plataformas
+- [ X ] Botón/Opción para crear un nuevo videojuego
 
 #### Base de datos
 
@@ -157,7 +157,7 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
 - [ X ] __GET /videogames?name="..."__:
   - Obtener un listado de las primeros 15 videojuegos que contengan la palabra ingresada como query parameter
   - Si no existe ningún videojuego mostrar un mensaje adecuado
-- [ ] __GET /videogame/{idVideogame}__:
+- [ X ] __GET /videogame/{idVideogame}__:
   - Obtener el detalle de un videojuego en particular
   - Debe traer solo los datos pedidos en la ruta de detalle de videojuego
   - Incluir los géneros asociados

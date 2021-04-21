@@ -6,11 +6,11 @@ import videoGame from "../../assets/video-games.png";
 const Card = ({ data }) => {
   let history = useHistory();
   const handleGetId = () => history.push(`/details/${data.id}`);
-  
+
   return (
     <div className="card">
       <div className="image">
-        <img src={data.image ? data.image : videoGame } alt="no image" />
+        <img src={data.image ? data.image : videoGame} alt="no found" />
       </div>
       <div className="detail">
         <h3>{data.name}</h3>

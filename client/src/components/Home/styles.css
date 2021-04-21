@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 
 .container_home {
   text-align: center;
@@ -85,5 +85,5 @@ button {
 }
 
 .main-title {
-  font-family: 'Bangers', cursive;
+  font-family: "Bangers", cursive;
 }

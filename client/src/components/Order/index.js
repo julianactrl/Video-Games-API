@@ -1,14 +1,14 @@
 import React from "react";
-import './styles.css'
+import "./styles.css";
 import { useDispatch } from "react-redux";
-import { orderBy, orderByDesc} from "../../redux/actions";
+import { orderBy, orderByDesc } from "../../redux/actions";
 
 const Order = () => {
   const dispatch = useDispatch();
   // ordenamiento alfabetico
   const onOrderChange = (e) => {
-    if(e.target.value === "az" || e.target.value === "highest") {
-      dispatch(orderBy(e.target.value))
+    if (e.target.value === "az" || e.target.value === "highest") {
+      dispatch(orderBy(e.target.value));
     } else {
       dispatch(orderByDesc(e.target.value));
     }
