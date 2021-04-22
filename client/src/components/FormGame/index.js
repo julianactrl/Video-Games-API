@@ -8,6 +8,7 @@ import mushroom from "../../assets/mushroom.png";
 
 const FormGame = () => {
   const history = useHistory();
+  const handleForm = () => history.goBack();
 
   const initGame = {
     name: "",
@@ -159,9 +160,7 @@ const FormGame = () => {
               type="submit"
               id="contact-submit"
               data-submit="...Sending"
-              onClick={() => {
-                history.goBack();
-              }}
+              onClick={handleForm}
             >
               Submit
             </button>

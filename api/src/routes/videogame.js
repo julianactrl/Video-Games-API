@@ -56,12 +56,11 @@ server.get("/", async (req, res, next) => {
             };
           });
           pagesApi = pagesApi.concat(gamesApi);
+          
         })
         .catch((err) => next(err));
     }
-    // const arraysDbApi =
-    // console.log(arraysDbApi)
-    res.status(200).send(pagesApi.concat(select));
+    res.status(200).send([...pagesApi, ...select]);
   } catch (err) {
     next(err);
   }
@@ -100,7 +99,7 @@ server.get("/search", async (req, res, next) => {
             source: "Api",
           };
         });
-        res.status(200).json(gamesNameApi.concat(gameDb));
+        res.status(200).json([...gamesNameApi, ...gameDb]);
       } catch (err) {
         console.error(err);
         res.sendStatus(400).json({ message: "ERROR: GAME NOT FOUNT" });

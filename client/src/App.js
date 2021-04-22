@@ -9,12 +9,14 @@ import FormGame from './components/FormGame';
 function App() {
   return (
     <div className="App">
-      <>
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/details/:id" render={({ match }) => <CardDetails id={match.params.id} />} />
-        <Route exact path="/form" component={FormGame} />
-      </>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/details/:id" render={({ match }) => <CardDetails id={match.params.id} />} />
+          <Route exact path="/form" component={FormGame} />
+        </Switch>
+      </Router>
     </div>
   );
 }

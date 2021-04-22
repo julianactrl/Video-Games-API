@@ -15,11 +15,11 @@ const Filter = () => {
     dispatch(getGenresDb());
   }, []);
 
-  const handleFilter = (e) => {
+  const handleFilter =  (e) => {
     if (e.target.value === "Api" || e.target.value === "Created") {
       dispatch(filterBySource(e.target.value));
     } else {
-      dispatch(filterByGenres(e.target.value));
+       dispatch(filterByGenres(e.target.value));
     }
   };
 

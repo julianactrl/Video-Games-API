@@ -66,7 +66,7 @@ export const searchGamesQuery = (input) => async (dispatch) => {
 };
 
 // GETTING GENRES FROM DB AND ORDER BY
-export const getGenresDb = () => async (dispatch) => {
+export const getGenresDb = () => async (dispatch, getState) => {
   dispatch({
     type: GET_GENRE,
   });

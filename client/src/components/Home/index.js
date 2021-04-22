@@ -27,7 +27,7 @@ const Home = () => {
   const filterGames = useSelector((state) => state.filterGames);
   let allGames;
 
-  useEffect(() => {
+  useEffect( () => {
     dispatch(getAllGames());
   }, []);
 
@@ -44,7 +44,7 @@ const Home = () => {
   const indexLastPage = currentPage * cardPerPage;
   const indexFirtsPage = indexLastPage - cardPerPage;
   let page = allGames.slice(indexFirtsPage, indexLastPage);
-  console.log(page);
+  
 
   return (
     <div className="container_home">
