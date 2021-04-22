@@ -21,9 +21,12 @@ const CardDetails = ({ id }) => {
 
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
+    {loading ? (
+          <Loader />
+        ) : error ? (
+          <div>{error}</div>
+        ) : (
+     
         <>
           <header className="header_details">
             <button
@@ -38,12 +41,12 @@ const CardDetails = ({ id }) => {
           <div className="full">
             <h1>{gamesId.name}</h1>
             <div className="">
-              <div className="">
+              <figure className="image_div">
                 <img
                   src={gamesId.image ? gamesId.image : videoGame}
                   alt="no found"
                 />
-              </div>
+              </figure>
               <div className="">
                 <h2>Description</h2>
                 <p>{gamesId.description}</p>

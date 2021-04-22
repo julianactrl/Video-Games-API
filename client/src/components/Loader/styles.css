@@ -5,6 +5,9 @@
   flex-direction: column;
 }
 
+.loading-text {
+  margin-top: 30px;
+}
 
 .lds-roller {
   display: inline-block;

@@ -13,11 +13,14 @@ const Order = () => {
       dispatch(orderByDesc(e.target.value));
     }
   };
+  const refreshPage = () => {
+    window.location.reload();
+  }
 
   return (
     <div className="select">
       <select name="slct" id="slct" onChange={onOrderChange}>
-        <option defaultValue>Order By</option>
+        <option onClick={refreshPage} defaultValue>Order By</option>
         <option value="az">A - Z</option>
         <option value="za">Z - A</option>
         <option value="lowest">Rating lowest</option>

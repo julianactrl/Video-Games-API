@@ -3,20 +3,9 @@ const { GAMES_ALL, SEARCH_GAMES, GAMES_ID, API_KEY } = process.env;
 const axios = require("axios");
 const server = require("express").Router();
 const { Videogame, Genre } = require("../db.js");
-const { Op, Col } = require("sequelize");
+const { Op } = require("sequelize");
 const { name } = require("../app.js");
-// server.get("/", async (req, res, next) => {
-//   const games_api = axios.get(`${GAMES_ALL}${API_KEY}`)
-//   const genre_db = Videogame.findAll()
-//   Promise.all([games_api, genre_db])
-//   .then(r => {
-//     let [games_api_r, genre_db_r] = r
-//     return res.send(
-//       genre_db_r.concat(games_api_r.data.results)
-//     )
-//     .catch(err => next(err))
-//   })
-// });
+
 
 // [ X ] GET /videogames:
 // Obtener un listado de los primeras 15 videojuegos
@@ -38,7 +27,6 @@ server.get("/", async (req, res, next) => {
     });
     let gamesApi;
     let pagesApi = [];
-    // console.log("soy el array", pagesApi)
     for (let i = 1; i <= 5; i++) {
       let result = await axios
         .get(`${GAMES_ALL}${API_KEY}&page=${i}`)
@@ -56,7 +44,6 @@ server.get("/", async (req, res, next) => {
             };
           });
           pagesApi = pagesApi.concat(gamesApi);
-          
         })
         .catch((err) => next(err));
     }
@@ -73,33 +60,40 @@ Si no existe ningún videojuego mostrar un mensaje adecuado
 */
 server.get("/search", async (req, res, next) => {
   const game = req.query.search || "";
-  console.log("SOY LA QUERY", game);
+
   await axios
     .get(`${SEARCH_GAMES}?search=${game}&key=${API_KEY}`)
     .then(async (query) => {
       try {
-        const gameDb = await Videogame.findAll({
-          where: {
-            name: {
-              [Op.iLike]: `%${game}%`,
+        if (game) {
+          const gameDb = await Videogame.findAll({
+            where: {
+              name: {
+                [Op.iLike]: `%${game}%`,
+              },
             },
-          },
-        });
-        const queryResultName = query.data.results;
-        // const apiSliceQuery = queryResultName.slice(0, 15);
-        const gamesNameApi = queryResultName.map((query) => {
-          return {
-            id: query.id,
-            name: query.name,
-            image: query.background_image,
-            rating: query.rating,
-            released: query.released,
-            platforms: query.platforms.map((p) => p.platform.name).join(", "),
-            genres: query.genres.map((g) => g.name).join(", "),
-            source: "Api",
-          };
-        });
-        res.status(200).json([...gamesNameApi, ...gameDb]);
+          });
+          const queryResultName = query.data.results;
+          const gamesNameApi =
+            queryResultName &&
+            queryResultName.map((query) => {
+              return {
+                id: query.id,
+                name: query.name,
+                image: query.background_image,
+                rating: query.rating,
+                released: query.released,
+                platforms:
+                  query.platforms &&
+                  query.platforms.map((p) => p.platform.name).join(", "),
+                genres: query.genres.map((g) => g.name).join(", "),
+                source: "Api",
+              };
+            });
+          res.status(200).json(gamesNameApi.concat(gameDb));
+        } else {
+          res.json({ message: "We could not found the game :(" });
+        }
       } catch (err) {
         console.error(err);
         res.sendStatus(400).json({ message: "ERROR: GAME NOT FOUNT" });
@@ -124,23 +118,23 @@ GET /videogame/{idVideogame}__:
 server.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    //  console.log(id);
     let gameIdDb = await Videogame.findOne({
       where: { id: id },
-      attributes: ['name', 'description', 'rating', 'released', 'platforms'],
+      attributes: ["name", "description", "rating", "released", "platforms"],
       include: {
         model: Genre,
-        attributes: { exclude: ['createdAt', 'updatedAt', 'videogame_genre', 'id'] },
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "videogame_genre", "id"],
+        },
         through: { attributes: [] },
-      }
-    })
-   
+      },
+    });
+
     if (!gameIdDb) {
       await axios
         .get(`${GAMES_ID}${id}?key=${API_KEY}`)
         .then((index) => {
           const apiGameRes = index.data;
-          // console.log(apiGameRes);
           const newGameObj = {
             id: apiGameRes.id,
             name: apiGameRes.name,
@@ -151,7 +145,7 @@ server.get("/:id", async (req, res, next) => {
             platforms: apiGameRes.platforms
               .map((p) => p.platform.name)
               .join(", "),
-            genres: apiGameRes.genres,            
+            genres: apiGameRes.genres,
           };
           res.status(200).json(newGameObj);
         })
@@ -192,26 +186,38 @@ server.post("/", async (req, res, next) => {
     });
     const genreIdMap = genres.map(async (genre) => {
       const newGamePost = await Genre.findOne({ where: { name: genre } });
-      console.log("soy el nuevo juego relacionado", newGamePost);
       if (newGamePost === null) {
         console.log("Not found!");
       } else {
         console.log(newGamePost instanceof Genre); // true
-        console.log(newGamePost); //
+        console.log("SOY EL NUEVO JUEGO", newGamePost); 
       }
       await gamePost.addGenre(newGamePost.id);
     });
-    console.log(genreIdMap);
     const result = await Videogame.findOne({
       where: {
         name: name,
       },
       include: Genre,
     });
-    res.status(200).send("Creado con exitos");
+    res.status(200).send("Creado con exito");
   } catch (err) {
     next(err);
   }
 });
 
 module.exports = server;
+
+
+// server.get("/", async (req, res, next) => {
+//   const games_api = axios.get(`${GAMES_ALL}${API_KEY}`)
+//   const genre_db = Videogame.findAll()
+//   Promise.all([games_api, genre_db])
+//   .then(r => {
+//     let [games_api_r, genre_db_r] = r
+//     return res.send(
+//       genre_db_r.concat(games_api_r.data.results)
+//     )
+//     .catch(err => next(err))
+//   })
+// });

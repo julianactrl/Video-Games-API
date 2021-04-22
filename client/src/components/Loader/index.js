@@ -5,7 +5,7 @@ const Loader = () => {
   return (
     <div className="loader">
         <div className="loading-text">
-            <span>We are searching for the games! 🥳</span>
+            <span> 💥 We are searching for the games! 🥳</span>
         </div>
         <div className="lds-roller"><div></div><div></div><div></div></div>
     </div>

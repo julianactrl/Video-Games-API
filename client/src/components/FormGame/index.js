@@ -4,9 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { getGenresDb, postNewGame } from "../../redux/actions";
 import "./styles.css";
 import swal from "sweetalert";
+// import { useForm } from "react-hook-form";
 import mushroom from "../../assets/mushroom.png";
 
 const FormGame = () => {
+ 
+
   const history = useHistory();
   const handleForm = () => history.goBack();
 
@@ -19,7 +22,6 @@ const FormGame = () => {
     platforms: "",
   };
   const [game, setGame] = useState(initGame);
-  console.log(game);
   const dispatch = useDispatch();
   const genresRedux = useSelector((state) => state.genresState.genres);
 
@@ -37,19 +39,17 @@ const FormGame = () => {
       genres: game.genres,
       platforms: game.platforms,
     };
-    console.log(gameSend);
     dispatch(postNewGame(gameSend));
     e.target.reset();
     swal("Game created succesfully!", {
       buttons: false,
-      timer: 1000,
+      timer: 3000,
     });
   };
 
   const handleInputChange = (e) => {
     if (e.target.name === "genres") {
       const arr = game[e.target.name];
-      console.log("soy el arr", arr);
       setGame({
         ...game,
         [e.target.name]: arr.concat(e.target.value),
@@ -61,6 +61,7 @@ const FormGame = () => {
       });
     }
   };
+
 
   return (
     <div className="background">
@@ -74,11 +75,12 @@ const FormGame = () => {
           <img src={mushroom} alt="logo" />
         </button>
       </header>
-      <div className="container_form">
+      <div className="container_form" >
         <form id="form_game" onSubmit={gameDb}>
           <h3>Create your video game</h3>
           <h4>Use your imagination</h4>
           <fieldset>
+          <label>Name</label>
             <input
               value={game.name}
               onChange={handleInputChange}
@@ -143,6 +145,7 @@ const FormGame = () => {
                   <label className="container_checkbox">
                     {g.name}
                     <input
+                      tabIndex="6"
                       onChange={handleInputChange}
                       type="checkbox"
                       name="genres"
