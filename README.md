@@ -1,12 +1,14 @@
 <p align='left'>
-    <img src='https://static.wixstatic.com/media/85087f_0d84cbeaeb824fca8f7ff18d7c9eaafd~mv2.png/v1/fill/w_160,h_30,al_c,q_85,usm_0.66_1.00_0.01/Logo_completo_Color_1PNG.webp' </img>
+    <img src='https://static.wixstatic.com/media/85087f_0d84cbeaeb824fca8f7ff18d7c9eaafd~mv2.png/v1/fill/w_160,h_30,al_c,q_85,usm_0.66_1.00_0.01/Logo_completo_Color_1PNG.webp' />
 </p>
 
 # Individual Project - Henry Videogames
 
-<p align="right">
-  <img height="200" src="./landingGame.png" />
-</p>
+<div >
+  <!-- <img align='left' height="200" src='./cardsGames.png' /> -->
+  <img align="right" height="200" src="./landingGame.png" />
+</div> 
+
 
 ## Objetivos del Proyecto
 
@@ -174,3 +176,7 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
 - [ ] Al menos tener una ruta del backend con sus tests respectivos
 - [ ] Al menos tener un modelo de la base de datos con sus tests respectivos
 
+<div >
+  <img align='center' height="100%" width='100%' src='./cardsGames.png' />
+  <!-- <img align="right" height="200" src="./landingGame.png" /> -->
+</div> 
