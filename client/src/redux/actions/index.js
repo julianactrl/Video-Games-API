@@ -23,6 +23,11 @@ import {
 } from "./../constants";
 import axios from "axios";
 
+// const backUrl = process.env.REACT_APP_API
+// console.log(backUrl)
+
+const { REACT_APP_API } = process.env;
+
 // GETTING ALL GAMES FROM API AND DB 137
 export const getAllGames = () => async (dispatch) => {
   dispatch({
