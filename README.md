@@ -10,103 +10,94 @@
 </div> 
 
 
-## Objetivos del Proyecto
+## Project Objectives
 
-- Construir una App utlizando React, Redux, Node y Sequelize.
-- Afirmar y conectar los conceptos aprendidos en la carrera.
-- Aprender mejores prácticas.
-- Aprender y practicar el workflow de GIT.
-- Usar y practicar testing.
+- Build an App using React, Redux, Node and Sequelize.
+- Affirm and connect the concepts learned in the race.
+- Learn best practices.
+- Learn and practice the GIT workflow.
 
 
-#### Tecnologías:
-- [ X ] React
-- [ X ] Redux
-- [ X ] Express
-- [ X ] Sequelize - Postgres
+#### Technologies:
+- [X] React
+- [X] Redux
+- [X] Express
+- [X] Sequelize - Postgres
 
 #### Frontend
 
-Se debe desarrollar una aplicación de React/Redux que contenga las siguientes pantallas/rutas.
+React / Redux application with the following screens / paths.
 
-__Pagina inicial__: deben armar una landing page con
-- [ X ] Alguna imagen de fondo representativa al proyecto
-- [ X ] Botón para ingresar al home (`Ruta principal`)
+__Initial page__: landing page with
+- [X] A background image representative of the project
+- [X] Button to enter home (`Main route`)
 
-__Ruta principal__: debe contener
-- [ X ] Input de búsqueda para encontrar videojuegos por nombre
-- [ X ] Área donde se verá el listado de videojuegos. Deberá mostrar su:
-  - Imagen
-  - Nombre
-  - Géneros
-- [ X ] Botones/Opciones para filtrar por género y por videojuego existente o agregado por nosotros
-- [ X ] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los videojuegos por orden alfabético y por rating
-- [ X ] Paginado para ir buscando y mostrando los siguientes videojuegos
+__Main path__: contains
+- [X] Search input to find video games by name
+- [X] Area where the video game list will be seen. Shows his:
+   - Picture
+   - Name
+   - Genders
+- [X] Buttons / Options to filter by genre and by existing video game or added by us
+- [X] Buttons / Options to sort the video games both in ascending and descending order in alphabetical order and by rating
+- [X] Paged to go looking for and showing the following videogames
 
 
-__Ruta de detalle de videojuego__: debe contener
-- [ X ] Los campos mostrados en la ruta principal para cada videojuegos (imagen, nombre, y géneros)
-- [ X ] Descripción
-- [ X ] Fecha de lanzamiento
-- [ X ] Rating
-- [ X ] Plataformas
+__Video Game Detail Path__: Contains
+- [X] The fields shown in the main path for each video game (image, name, and genres)
+- [X] Description
+- [X] Release date
+- [X] Rating
+- [X] Platforms
 
-__Ruta de creación de videojuegos__: debe contener
-- [ X ] Un formulario __controlado__ con los siguientes campos
-  - Nombre
-  - Descripción
-  - Fecha de lanzamiento
-  - Rating
-- [ X ] Posibilidad de seleccionar/agregar varios géneros
-- [ X ] Posibilidad de seleccionar/agregar varias plataformas
-- [ X ] Botón/Opción para crear un nuevo videojuego
+__Video Game Creation Path__: Contains
+- [X] A form __controlado__ with the following fields
+   - Name
+   - Description
+   - Release date
+   - Rating
+- [X] Ability to select / add multiple genres
+- [X] Possibility to select / add several platforms
+- [X] Button / Option to create a new video game
 
-#### Base de datos
+#### Database
 
-El modelo de la base de datos deberá tener las siguientes entidades (Aquellas propiedades marcadas con asterísco deben ser obligatorias):
+The database model has the following entities:
 
-- [ X ] Videojuego con las siguientes propiedades:
-  - ID: * No puede ser un ID de un videojuego ya existente en la API rawg
-  - Nombre *
-  - Descripción *
-  - Fecha de lanzamiento
-  - Rating
-  - Plataformas *
-- [ X ] Genero con las siguientes propiedades:
-  - ID
-  - Nombre
-
-La relación entre ambas entidades debe ser de muchos a muchos ya que un videojuego puede pertenecer a varios géneros en simultaneo y, a su vez, un género puede contener múltiples videojuegos distintos. Un ejemplo sería el juego `Counter Strike` pertenece a los géneros Shooter y Action al mismo tiempo. Pero a su vez existen otros videojuegos considerados como Shooter o como Action.
+- [X] Video game with the following properties:
+   - ID: * It cannot be an ID of an existing game in the rawg API
+   - Name *
+   - Description *
+   - Release date
+   - Rating
+   - Platforms *
+- [X] Genre with the following properties:
+   - ID
+   - Name
+   - 
+The relationship between both entities is many to many since a video game can belong to several genres simultaneously and, in turn, a genre can contain multiple different video games.
 
 
 #### Backend
 
-Se debe desarrollar un servidor en Node/Express con las siguientes rutas:
+Development is server in Node / Express with the following paths:
 
-__IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y paginados brindados por la API externa, todas estas funcionalidades tienen que implementarlas ustedes.
-
-- [ X ] __GET /videogames__:
-  - Obtener un listado de los primeras 15 videojuegos
-  - Debe devolver solo los datos necesarios para la ruta principal
-- [ X ] __GET /videogames?name="..."__:
-  - Obtener un listado de las primeros 15 videojuegos que contengan la palabra ingresada como query parameter
-  - Si no existe ningún videojuego mostrar un mensaje adecuado
-- [ X ] __GET /videogame/{idVideogame}__:
-  - Obtener el detalle de un videojuego en particular
-  - Debe traer solo los datos pedidos en la ruta de detalle de videojuego
-  - Incluir los géneros asociados
-- [ X ] __GET /genres__:
-  - Obtener todos los tipos de géneros de videojuegos posibles
-  - En una primera instancia deberán traerlos desde rawg y guardarlos en su propia base de datos y luego ya utilizarlos desde allí
-- [ X ] __POST /videogame__:
-  - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de videojuego por body
-  - Crea un videojuego en la base de datos
-
-
-#### Testing
-- [ ] Al menos tener un componente del frontend con sus tests respectivos
-- [ ] Al menos tener una ruta del backend con sus tests respectivos
-- [ ] Al menos tener un modelo de la base de datos con sus tests respectivos
+- [X] __GET / videogames__:
+   - Get a list of the first 15 video games
+   - It should return only the data necessary for the main path
+- [X] __GET /videogames?name="..."__:
+   - Obtain a list of the first 15 video games that contain the word entered as query parameter
+   - If there is no video game show a suitable message
+- [X] __GET / videogame / {idVideogame} __:
+   - Get the detail of a particular video game
+   - You must bring only the data requested in the video game detail path
+   - Include associated genres
+- [X] __GET / genres__:
+   - Get all types of video game genres possible
+   - In the first instance, they must bring them from rawg and save them in their own database and then use them from there
+- [X] __POST / videogame__:
+   - Receive the data collected from the controlled form of the video game creation path by body
+   - Create a video game in the database
 
 <div >
   <img align='center' height="100%" width='100%' src='./cardsGames.png' />
