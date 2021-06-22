@@ -24,12 +24,13 @@ const axios = require("axios");
 const { Genre } = require("./src/db");
 const { GENRE_URL, API_KEY } = process.env;
 // Syncing all the models at once.
+const PORT = process.env.PORT || 3001
 conn.sync({ force: false }).then(() => {
-  server.listen(3001, async () => {
+  server.listen(PORT, async () => {
     console.log("conexión con la base de datos correcta");
     console.log("%s listening at 3001"); // eslint-disable-line no-console
     await axios
-      .get(`${GENRE_URL}${API_KEY}`)
+      .get(`${GENRE_URL}?key=${API_KEY}`)
       .then((r) => {
         const result = r.data.results;
         //console.log(result)

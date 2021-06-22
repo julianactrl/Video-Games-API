@@ -34,7 +34,7 @@ export const getAllGames = () => async (dispatch) => {
     type: GET_ALL_VIDEOGAMES,
   });
   return await axios
-    .get("http://localhost:3001/videogames")
+    .get(`${REACT_APP_API}/videogames`)
     .then((res) => {
       dispatch({
         type: GET_GAMES_SUCCESS,
@@ -55,7 +55,7 @@ export const searchGamesQuery = (input) => async (dispatch) => {
     type: SEARCH_GAMES,
   });
   return await axios
-    .get(`http://localhost:3001/videogames/search?search=${input}`)
+    .get(`${REACT_APP_API}/videogames/search?search=${input}`)
     .then((r) => {
       dispatch({
         type: SEARCH_GAMES_SUCCESS,
@@ -76,7 +76,7 @@ export const getGenresDb = () => async (dispatch, getState) => {
     type: GET_GENRE,
   });
   return await axios
-    .get("http://localhost:3001/genres")
+    .get(`${REACT_APP_API}/genres`)
     .then((g) => {
       dispatch({
         type: GET_GENRE_SUCCESS,
@@ -98,7 +98,7 @@ export const postNewGame = (body) => async (dispatch) => {
     type: ADD_NEW_GAME,
   });
   return await axios
-    .post(`http://localhost:3001/videogames`, body)
+    .post(`${REACT_APP_API}/videogames`, body)
     .then((p) => {
       dispatch({
         type: ADD_NEW_GAME_SUCCESS,
@@ -120,7 +120,7 @@ export const getGamesById = (id) => async (dispatch) => {
     type: GET_GAME_ID,
   });
   return await axios
-    .get(`http://localhost:3001/videogames/${id}`)
+    .get(`${REACT_APP_API}/videogames/${id}`)
     .then((i) => {
       const result = i.data;
 

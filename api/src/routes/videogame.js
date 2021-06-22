@@ -29,7 +29,7 @@ server.get("/", async (req, res, next) => {
     let pagesApi = [];
     for (let i = 1; i <= 5; i++) {
       let result = await axios
-        .get(`${GAMES_ALL}${API_KEY}&page=${i}`)
+        .get(`${GAMES_ALL}?key=${API_KEY}&page=${i}`)
         .then((g) => {
           gamesApi = g.data.results.map((game) => {
             return {
