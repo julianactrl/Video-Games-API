@@ -6,7 +6,6 @@ const { Videogame, Genre } = require("../db.js");
 const { Op } = require("sequelize");
 const { name } = require("../app.js");
 
-
 // [ X ] GET /videogames:
 // Obtener un listado de los primeras 15 videojuegos
 // Debe devolver solo los datos necesarios para la ruta principal
@@ -28,9 +27,10 @@ server.get("/", async (req, res, next) => {
     let gamesApi;
     let pagesApi = [];
     for (let i = 1; i <= 5; i++) {
-      let result = await axios
+      await axios
         .get(`${GAMES_ALL}?key=${API_KEY}&page=${i}`)
         .then((g) => {
+          
           gamesApi = g.data.results.map((game) => {
             return {
               id: game.id,
@@ -190,7 +190,7 @@ server.post("/", async (req, res, next) => {
         console.log("Not found!");
       } else {
         console.log(newGamePost instanceof Genre); // true
-        console.log("SOY EL NUEVO JUEGO", newGamePost); 
+        console.log("SOY EL NUEVO JUEGO", newGamePost);
       }
       await gamePost.addGenre(newGamePost.id);
     });
@@ -207,7 +207,6 @@ server.post("/", async (req, res, next) => {
 });
 
 module.exports = server;
-
 
 // server.get("/", async (req, res, next) => {
 //   const games_api = axios.get(`${GAMES_ALL}${API_KEY}`)
