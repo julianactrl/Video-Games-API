@@ -11,7 +11,7 @@ const Cards = ({ games, loading, error }) => {
     window.location.reload();
   }
 
-  if (error) return <h1 className="main-title">ERROR</h1>;
+  //if (error) return <h1 className="main-title">{error}</h1>;
   if (!loading && !games.length) {
     return (
       <>
